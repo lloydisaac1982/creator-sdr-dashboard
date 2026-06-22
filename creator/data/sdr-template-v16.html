@@ -755,7 +755,7 @@ body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:var(--bg
     <button class="bb-mode" id="bbModeAnalyst" onclick="bbMode('analyst')"><i class="fas fa-bolt"></i> Quick Analyst</button>
   </div>
 
-  <div class="bb-data-tag" id="bbDataTag"><i class="fas fa-database"></i> <span id="bbDataTagText">No incident data loaded yet</span></div>
+  <div class="bb-data-tag" id="bbDataTag"><i class="fas fa-database"></i> <span id="bbDataTagText">Snapshot: 788 Portakabin incidents (Jan&ndash;Jun 2026) &middot; 160 raised in May &middot; 36 P2/High &middot; MTTR 0.4d (May)</span></div>
 
   <!-- LIVE AGENT VIEW -->
   <div class="bb-live" id="bbLive">
@@ -803,15 +803,13 @@ body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:var(--bg
   <p><span class="ops-name">Hybrid Cloud Operations</span> &bull; <span class="period-name">May 2026</span></p>
  </div>
  <nav>
-  <a href="#" class="active" onclick="showSection('upload',this)"><i class="fas fa-upload"></i>Dashboard / Upload</a>
+  <a href="#" class="active" onclick="showSection('leadershipSummary',this)"><i class="fas fa-crown"></i>Leadership Summary</a>
   <a href="#" onclick="showSection('execSummary',this)"><i class="fas fa-chart-line"></i>Executive Summary</a>
   <a href="#" onclick="showSection('financial',this)"><i class="fas fa-dollar-sign"></i>Financial Overview</a>
   <a href="#" onclick="showSection('servicePerf',this)"><i class="fas fa-tachometer-alt"></i>Service Performance</a>
   <a href="#" onclick="showSection('people',this)"><i class="fas fa-users"></i>People & Capability</a>
   <a href="#" onclick="showSection('innovation',this)"><i class="fas fa-lightbulb"></i>Innovation & CIPs</a>
-  <a href="#" onclick="showSection('incidents',this)"><i class="fas fa-exclamation-triangle"></i>Incidents</a>
-  <a href="#" onclick="showSection('tasks',this)"><i class="fas fa-tasks"></i>Tasks</a>
-  <a href="#" onclick="showSection('changes',this)"><i class="fas fa-exchange-alt"></i>Changes</a>
+  <a href="#" onclick="showSection('ticketIntelligence',this)"><i class="fas fa-ticket-alt"></i>Ticket Intelligence</a>
   <a href="#" onclick="showSection('projects',this)"><i class="fas fa-project-diagram"></i>Projects</a>
   <a href="#" onclick="showSection('demographics',this)"><i class="fas fa-server"></i>Account Demographics</a>
   <a href="#" onclick="showSection('heatmap',this)"><i class="fas fa-th"></i>Intelligent Ops Heat Map</a>
@@ -839,25 +837,95 @@ body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:var(--bg
  </div>
  <div class="content">
 
-<!-- ========== UPLOAD ========== -->
-<div class="section active" id="upload">
- <h2 class="section-title"><i class="fas fa-upload"></i> Dashboard & Data Upload</h2>
- <p class="section-subtitle">Upload a new <b>SDR PowerPoint</b> (same template, new data) to refresh every section automatically. Optionally add the Incident / Task / Change spreadsheets for the dynamic ticket views. Then click <b>Load &amp; Process Data</b>.</p>
- <div class="upload-area">
-  <div class="upload-grid">
-   <div class="upload-item"><i class="fas fa-file-powerpoint"></i><label>SDR Dataset (.pptx)</label><input type="file" id="fileSDR" accept=".pptx" onchange="markFile(this,'statusSDR')"><div class="file-status" id="statusSDR"><i class="fas fa-check-circle"></i> Loaded</div></div>
-   <div class="upload-item"><i class="fas fa-file-excel"></i><label>Incident Dataset (.xlsx)</label><input type="file" id="fileIncident" accept=".xlsx" onchange="markFile(this,'statusInc')"><div class="file-status" id="statusInc"><i class="fas fa-check-circle"></i> Loaded</div></div>
-   <div class="upload-item"><i class="fas fa-file-excel"></i><label>Tasks Dataset (.xlsx)</label><input type="file" id="fileTasks" accept=".xlsx" onchange="markFile(this,'statusTask')"><div class="file-status" id="statusTask"><i class="fas fa-check-circle"></i> Loaded</div></div>
-   <div class="upload-item"><i class="fas fa-file-excel"></i><label>Change Dataset (.xlsx)</label><input type="file" id="fileChange" accept=".xlsx" onchange="markFile(this,'statusChg')"><div class="file-status" id="statusChg"><i class="fas fa-check-circle"></i> Loaded</div></div>
+<!-- ========== UPLOAD SECTION REMOVED (per request) ==========
+     Hidden stubs retained so the save/load-state JS keeps null-safe references. -->
+<div hidden>
+ <input type="file" id="fileSDR"><input type="file" id="fileIncident">
+ <input type="file" id="fileTasks"><input type="file" id="fileChange">
+ <span id="saveStatus"></span><div id="lastSavedInfo"></div>
+ <div id="autoLoadBanner"><span id="autoLoadMsg"></span></div>
+</div>
+
+<!-- ========== LEADERSHIP SUMMARY ========== -->
+<div class="section active" id="leadershipSummary">
+ <h2 class="section-title"><i class="fas fa-crown"></i> Leadership Summary</h2>
+ <p class="section-subtitle">One-glance executive snapshot &mdash; <span class="acct-name">Portakabin</span> <span class="ops-name">Hybrid Cloud Operations</span> &middot; <span class="period-name">May 2026</span> &middot; Overall service health: <span class="rag rag-green">GREEN</span></p>
+
+ <!-- ===== Snapshot of Highlights ===== -->
+ <div class="highlight-box" style="border-left:4px solid var(--accent-green);">
+  <h4><i class="fas fa-star" style="color:#f1c40f;"></i> Snapshot of Highlights</h4>
+  <ul>
+   <li><i class="fas fa-check-circle" style="color:var(--accent-green);"></i> Monthly patching completed with <b>100% compliance</b></li>
+   <li><i class="fas fa-check-circle" style="color:var(--accent-green);"></i> In-Place OS upgrades: <b>SAP-PKD</b> &amp; <b>SAP-PKQ</b> moved from Windows Server 2008 &rarr; 2012</li>
+   <li><i class="fas fa-check-circle" style="color:var(--accent-green);"></i> Decommissioned EOL servers <b>ptkcelnprd01</b> &amp; <b>ptkcelnprdmgt01</b></li>
+   <li><i class="fas fa-check-circle" style="color:var(--accent-green);"></i> Security hardening: legacy RSA GPOs de-linked, Wireshark removed (3 servers), speculative-execution patches applied</li>
+   <li><i class="fas fa-check-circle" style="color:var(--accent-green);"></i> <b>SnowInventory V7.5.0</b> deployed across 2012 estate; DFS secondary target enabled for German Share</li>
+   <li><i class="fas fa-exclamation-circle" style="color:var(--accent-amber);"></i> <b>Watch:</b> OS upgrade of remaining EOL servers still outstanding &mdash; remediation in progress</li>
+  </ul>
+ </div>
+
+ <!-- ===== Financial Snapshot ===== -->
+ <h4 style="margin:16px 0 8px;color:var(--primary);"><i class="fas fa-dollar-sign"></i> Financial Snapshot</h4>
+ <div class="kpi-grid">
+  <div class="kpi-card blue"><div class="kpi-icon"><i class="fas fa-hand-holding-usd"></i></div><div class="kpi-label">Total Contract Value</div><div class="kpi-value">$15.1M</div></div>
+  <div class="kpi-card"><div class="kpi-icon"><i class="fas fa-users-cog"></i></div><div class="kpi-label"># FACT FTE</div><div class="kpi-value">1.64</div></div>
+  <div class="kpi-card"><div class="kpi-icon"><i class="fas fa-file-invoice-dollar"></i></div><div class="kpi-label">FACT Cost (Monthly)</div><div class="kpi-value">$3.47K</div></div>
+  <div class="kpi-card amber"><div class="kpi-icon"><i class="fas fa-user-tie"></i></div><div class="kpi-label">May Actual FTE</div><div class="kpi-value">2.30</div></div>
+  <div class="kpi-card green"><div class="kpi-icon"><i class="fas fa-money-bill-wave"></i></div><div class="kpi-label">May Deployed Cost</div><div class="kpi-value">$8.30K</div></div>
+ </div>
+ <div class="highlight-box" style="margin-bottom:18px;">
+  <ul><li><i class="fas fa-info-circle" style="color:var(--primary);"></i> Deployed cost has scaled with demand from <b>$3.32K (Jan)</b> to <b>$8.30K (May)</b> as actual FTE rose from 1.74 to 2.30 &mdash; still delivering above the 1.64 FACT model baseline.</li></ul>
+ </div>
+ <div class="chart-grid">
+  <div class="chart-box"><h4><i class="fas fa-user-friends" style="color:var(--primary);"></i> FTE Trend (Actual vs FACT)</h4><canvas id="ls-fte-trend"></canvas></div>
+  <div class="chart-box"><h4><i class="fas fa-money-bill-trend-up"></i> FTE Cost Trend</h4><canvas id="ls-fte-cost"></canvas></div>
+ </div>
+
+ <!-- ===== Innovation Snapshot ===== -->
+ <h4 style="margin:16px 0 8px;color:var(--primary);"><i class="fas fa-lightbulb"></i> Innovation Snapshot</h4>
+ <div class="kpi-grid">
+  <div class="kpi-card blue"><div class="kpi-icon"><i class="fas fa-robot"></i></div><div class="kpi-label">Active CIP Activities</div><div class="kpi-value">2</div></div>
+  <div class="kpi-card amber"><div class="kpi-icon"><i class="fas fa-cog"></i></div><div class="kpi-label">Tasks Codified</div><div class="kpi-value">8 / 13</div></div>
+  <div class="kpi-card green"><div class="kpi-icon"><i class="fas fa-award"></i></div><div class="kpi-label">Completed Innovations</div><div class="kpi-value">6</div></div>
+  <div class="kpi-card"><div class="kpi-icon"><i class="fas fa-chart-line"></i></div><div class="kpi-label">Intelligent Ops Score</div><div class="kpi-value">17 / L3</div></div>
+ </div>
+ <div class="highlight-box" style="margin-bottom:18px;">
+  <ul>
+   <li><i class="fas fa-robot" style="color:var(--primary);"></i> <b>Enterprise AI Integration via MCP</b> (Boomi &amp; SAP) &mdash; ~40% projected cut in integration build/lead time</li>
+   <li><i class="fas fa-certificate" style="color:var(--accent-blue);"></i> <b>ADCS Certificate-Expiry Automation</b> (Ansible + ServiceNow) &mdash; 5/5 tasks codified; targets ~100% prevention of cert-expiry outages</li>
+  </ul>
+ </div>
+
+ <!-- ===== Incident Snapshot ===== -->
+ <h4 style="margin:16px 0 8px;color:var(--primary);"><i class="fas fa-exclamation-triangle"></i> Incident Snapshot</h4>
+ <div class="kpi-grid">
+  <div class="kpi-card blue"><div class="kpi-icon"><i class="fas fa-layer-group"></i></div><div class="kpi-label">Incidents (6-Month)</div><div class="kpi-value">788</div></div>
+  <div class="kpi-card"><div class="kpi-icon"><i class="fas fa-calendar-day"></i></div><div class="kpi-label">Raised in May</div><div class="kpi-value">160</div></div>
+  <div class="kpi-card green"><div class="kpi-icon"><i class="fas fa-stopwatch"></i></div><div class="kpi-label">MTTR (May)</div><div class="kpi-value">0.43d</div></div>
+  <div class="kpi-card green"><div class="kpi-icon"><i class="fas fa-check-double"></i></div><div class="kpi-label">Closed</div><div class="kpi-value">755</div></div>
+  <div class="kpi-card amber"><div class="kpi-icon"><i class="fas fa-hourglass-half"></i></div><div class="kpi-label">Open / Aging</div><div class="kpi-value">33</div></div>
+  <div class="kpi-card red"><div class="kpi-icon"><i class="fas fa-bolt"></i></div><div class="kpi-label">P2 / High</div><div class="kpi-value">36</div></div>
+ </div>
+ <div class="chart-grid">
+  <div class="chart-box">
+   <h4><i class="fas fa-stopwatch" style="color:var(--primary);"></i> MTTR Trend &mdash; 6-Month (days)</h4>
+   <div class="filter-bar" style="margin-bottom:10px;">
+    <label style="font-size:11px;color:var(--text-light);">Auto-resolved:
+     <select id="ls-mttr-auto" onchange="lsRenderMttr()">
+      <option value="all">All incidents</option>
+      <option value="auto">Include auto-resolved only</option>
+      <option value="noauto">Exclude auto-resolved</option>
+     </select>
+    </label>
+    <label style="font-size:11px;color:var(--text-light);">Assignment group:
+     <select id="ls-mttr-group" onchange="lsRenderMttr()">
+      <option value="-1">All groups</option>
+     </select>
+    </label>
+   </div>
+   <canvas id="ls-mttr-trend"></canvas>
   </div>
-  <div style="text-align:center;"><button class="btn btn-primary" onclick="loadAllData()" style="padding:12px 34px;font-size:14px;"><i class="fas fa-cogs"></i> Load & Process Data</button></div>
-  <div class="save-bar">
-   <button class="btn btn-save" onclick="saveDataToStorage()"><i class="fas fa-save"></i> 💾 Save Data</button>
-   <button class="btn btn-clear" onclick="clearSavedData()"><i class="fas fa-trash-alt"></i> 🗑️ Clear Saved Data</button>
-   <span class="save-status" id="saveStatus"></span>
-  </div>
-  <div class="last-saved-info" id="lastSavedInfo"></div>
-  <div class="auto-load-banner" id="autoLoadBanner"><i class="fas fa-info-circle"></i> <span id="autoLoadMsg"></span></div>
+  <div class="chart-box"><h4><i class="fas fa-hourglass-half" style="color:var(--accent-red);"></i> Aging Ticket Snapshot &mdash; Open Incidents by Age</h4><canvas id="ls-aging-bar"></canvas></div>
  </div>
 </div>
 
@@ -930,18 +998,16 @@ body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:var(--bg
  <!-- Innovation Tab -->
  <div class="tab-content" id="esInnovation">
   <div class="kpi-grid">
-   <div class="kpi-card blue"><div class="kpi-icon"><i class="fas fa-robot"></i></div><div class="kpi-label">Total CIP Activities</div><div class="kpi-value">4</div></div>
-   <div class="kpi-card amber"><div class="kpi-icon"><i class="fas fa-cog"></i></div><div class="kpi-label">Tasks Codified</div><div class="kpi-value">0</div></div>
+   <div class="kpi-card blue"><div class="kpi-icon"><i class="fas fa-robot"></i></div><div class="kpi-label">Total CIP Activities</div><div class="kpi-value">2</div></div>
+   <div class="kpi-card amber"><div class="kpi-icon"><i class="fas fa-cog"></i></div><div class="kpi-label">Tasks Codified</div><div class="kpi-value">8 / 13</div></div>
    <div class="kpi-card green"><div class="kpi-icon"><i class="fas fa-award"></i></div><div class="kpi-label">Completed Innovations</div><div class="kpi-value">6</div></div>
    <div class="kpi-card"><div class="kpi-icon"><i class="fas fa-chart-line"></i></div><div class="kpi-label">Intelligent Ops Score</div><div class="kpi-value">17 / L3</div></div>
   </div>
   <div class="table-container"><table>
    <thead><tr><th>Activity Name</th><th>Trigger</th><th>Codify Type</th><th>Platform</th><th>Domain</th><th>Status</th><th>Key Benefit</th></tr></thead>
    <tbody>
-    <tr><td><b>VPN Access Automation</b></td><td>Event-driven</td><td>Agentic / Rule-based</td><td>Freshworks</td><td>Access Management</td><td><span class="badge badge-amber">In Progress</span></td><td>Reduced provisioning time; SLA adherence improvement</td></tr>
-    <tr><td><b>Network Share Drive Mapping</b></td><td>Event-driven</td><td>Rule-based / Scripts</td><td>Freshworks / AD</td><td>Identity &amp; Access</td><td><span class="badge badge-amber">In Progress</span></td><td>Reduced manual steps; faster access delivery</td></tr>
-    <tr><td><b>Patching E2E Automation (KACE→Freshworks)</b></td><td>Scheduled</td><td>DevOps / Agentic</td><td>KACE + Freshworks</td><td>Server / Endpoint Mgmt</td><td><span class="badge badge-gray">Evaluation</span></td><td>Improved patch compliance; reduced vulnerabilities</td></tr>
-    <tr><td><b>Proactive Ticket Health Check</b></td><td>Scheduled</td><td>Agentic / Rule-based</td><td>Freshworks / ITSM</td><td>ITSM Operations</td><td><span class="badge badge-blue">Planned</span></td><td>Reduced aging backlog; improved ITSM hygiene KPI</td></tr>
+    <tr><td><b>Enterprise AI Integration via MCP with Boomi &amp; SAP</b></td><td>Event-driven</td><td>Agentic</td><td>Agentic (MCP) + Boomi</td><td>Enterprise / App Integration</td><td><span class="badge badge-blue">Initiative</span></td><td>~40% reduction in integration build/lead time; faster cross-system data flow</td></tr>
+    <tr><td><b>Automated SSL/TLS Certificate Expiry Notifications (ADCS)</b></td><td>Scheduled</td><td>Rule-based / DevOps</td><td>Ansible + ServiceNow</td><td>Infrastructure / Security (PKI)</td><td><span class="badge badge-green">Codified (5/5)</span></td><td>~100% prevention of certificate-expiry outages; improved availability KPI</td></tr>
    </tbody>
   </table></div>
   <div class="highlight-box" style="margin-top:14px;border-left:4px solid var(--accent-green);">
@@ -960,19 +1026,19 @@ body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:var(--bg
  <!-- Finance Tab -->
  <div class="tab-content" id="esFinance">
   <div class="kpi-grid">
-   <div class="kpi-card blue"><div class="kpi-icon"><i class="fas fa-file-invoice-dollar"></i></div><div class="kpi-label">FACT FTE Cost</div><div class="kpi-value">TBC</div></div>
-   <div class="kpi-card"><div class="kpi-icon"><i class="fas fa-users-cog"></i></div><div class="kpi-label"># FACT FTE</div><div class="kpi-value">1.89</div></div>
-   <div class="kpi-card green"><div class="kpi-icon"><i class="fas fa-money-bill-wave"></i></div><div class="kpi-label">Current Month FTE Cost</div><div class="kpi-value">TBC</div></div>
+   <div class="kpi-card blue"><div class="kpi-icon"><i class="fas fa-file-invoice-dollar"></i></div><div class="kpi-label">FACT FTE Cost (Monthly)</div><div class="kpi-value">$3.47K</div></div>
+   <div class="kpi-card"><div class="kpi-icon"><i class="fas fa-users-cog"></i></div><div class="kpi-label"># FACT FTE</div><div class="kpi-value">1.64</div></div>
+   <div class="kpi-card green"><div class="kpi-icon"><i class="fas fa-money-bill-wave"></i></div><div class="kpi-label">Current Month FTE Cost</div><div class="kpi-value">$8.30K</div></div>
    <div class="kpi-card amber"><div class="kpi-icon"><i class="fas fa-user-tie"></i></div><div class="kpi-label">BAU FTE (May)</div><div class="kpi-value">2.3</div></div>
   </div>
   <div class="table-container"><table>
-   <thead><tr><th>Date</th><th>Leader</th><th>Account</th><th>Region</th><th>Domain</th><th>TCV $</th><th>FACT FTE</th><th>FACT Cost</th><th>Actual FTE</th><th>Deployed Cost</th></tr></thead>
+   <thead><tr><th>Date</th><th>CDE</th><th>Account</th><th>Region</th><th>Domain</th><th>TCV $</th><th>FACT FTE</th><th>FACT Cost</th><th>Actual FTE</th><th>Deployed Cost</th></tr></thead>
    <tbody>
-    <tr><td>Jan-26</td><td>Lloyd</td><td>Portakabin</td><td>EU</td><td>Hybrid Cloud</td><td>$25,000,000</td><td>7.07</td><td>$12,000.05</td><td>6.85</td><td>$8,611.25</td></tr>
-    <tr><td>Feb-26</td><td>Lloyd</td><td>Portakabin</td><td>EU</td><td>Hybrid Cloud</td><td>$25,000,000</td><td>7.07</td><td>$12,000.05</td><td>6.43</td><td>$8,367.40</td></tr>
-    <tr><td>Mar-26</td><td>Lloyd</td><td>Portakabin</td><td>EU</td><td>Hybrid Cloud</td><td>$25,000,000</td><td>7.07</td><td>$12,000.05</td><td>7.13</td><td>$10,000.11</td></tr>
-    <tr><td>Apr-26</td><td>Lloyd</td><td>Portakabin</td><td>EU</td><td>Hybrid Cloud</td><td>$25,000,000</td><td>7.07</td><td>$12,000.05</td><td>8.98</td><td>$11,236.01</td></tr>
-    <tr style="background:#E1F0EF;font-weight:600;"><td>May-26</td><td>Lloyd</td><td>Portakabin</td><td>EU</td><td>Hybrid Cloud</td><td>TBC</td><td>1.89</td><td>TBC</td><td>2.3</td><td>TBC</td></tr>
+    <tr><td>Jan-26</td><td>Judit Cooke</td><td>Portakabin</td><td>EMEA</td><td>Hybrid Cloud</td><td>$15,100,000</td><td>1.64</td><td>$3,469.09</td><td>1.74</td><td>$3,316.93</td></tr>
+    <tr><td>Feb-26</td><td>Judit Cooke</td><td>Portakabin</td><td>EMEA</td><td>Hybrid Cloud</td><td>$15,100,000</td><td>1.64</td><td>$3,469.09</td><td>1.73</td><td>$4,705.48</td></tr>
+    <tr><td>Mar-26</td><td>Judit Cooke</td><td>Portakabin</td><td>EMEA</td><td>Hybrid Cloud</td><td>$15,100,000</td><td>1.64</td><td>$3,469.09</td><td>1.96</td><td>$5,658.00</td></tr>
+    <tr><td>Apr-26</td><td>Judit Cooke</td><td>Portakabin</td><td>EMEA</td><td>Hybrid Cloud</td><td>$15,100,000</td><td>1.64</td><td>$3,469.09</td><td>2.33</td><td>$8,383.70</td></tr>
+    <tr style="background:#E1F0EF;font-weight:600;"><td>May-26</td><td>Judit Cooke</td><td>Portakabin</td><td>EMEA</td><td>Hybrid Cloud</td><td>$15,100,000</td><td>1.64</td><td>$3,469.09</td><td>2.3</td><td>$8,299.33</td></tr>
    </tbody>
   </table></div>
  </div>
@@ -1063,7 +1129,8 @@ body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:var(--bg
  <div class="table-container"><table>
   <thead><tr><th>Skill Area</th><th>Current Coverage</th><th>Target Coverage</th><th>Training</th><th>Owner</th><th>Target Date</th></tr></thead>
   <tbody>
-   <tr><td>AWS Administration</td><td>Windows</td><td>AWS</td><td>AWS Administrator</td><td>Chandra</td><td>Q2 2026</td></tr>
+   <tr><td>Azure Administration</td><td>Windows</td><td>Azure</td><td>Azure Administrator</td><td>Anindya</td><td>Q2 2026</td></tr>
+   <tr><td>AVD / VDI</td><td>Windows</td><td>AVD / VDI / Windows</td><td>AVD/VDI Training</td><td>Hafsa</td><td>Q3 2026</td></tr>
   </tbody>
  </table></div>
 </div>
@@ -1235,8 +1302,8 @@ body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:var(--bg
    <ul>
     <li><i class="fas fa-arrow-right" style="color:var(--primary);"></i> Enforcement of LDAP Signing Requirement on Domain Controllers</li>
     <li><i class="fas fa-arrow-right" style="color:var(--primary);"></i> Upgrade Microsoft Edge to latest version (148.0.3967.83) across estate</li>
-    <li><i class="fas fa-arrow-right" style="color:var(--primary);"></i> Complete VPN Access &amp; Network Share automation design with client</li>
-    <li><i class="fas fa-arrow-right" style="color:var(--primary);"></i> Begin KACE → Freshworks zero-touch patching pilot</li>
+    <li><i class="fas fa-arrow-right" style="color:var(--primary);"></i> Self-Healing for Disk Utilization — automated remediation (raised 25 May, Infra)</li>
+    <li><i class="fas fa-arrow-right" style="color:var(--primary);"></i> Zero-Touch Patching — continue assessment to reduce manual patching effort/errors</li>
     <li><i class="fas fa-arrow-right" style="color:var(--primary);"></i> Continue OS upgrade programme for remaining EOL servers</li>
     <li><i class="fas fa-arrow-right" style="color:var(--primary);"></i> Target AIOPS/Agentic maturity score from 0 → 1 (Partial compliance)</li>
    </ul>
@@ -1244,26 +1311,32 @@ body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:var(--bg
   <div class="highlight-box" style="border-left:4px solid var(--accent-amber);">
    <h4><i class="fas fa-exclamation-triangle" style="color:var(--accent-amber);"></i> Innovation Blockers &amp; Dependencies</h4>
    <ul>
-    <li><i class="fas fa-lock" style="color:var(--accent-red);"></i> Client approval required for VPN &amp; Network Share automation scope sign-off</li>
     <li><i class="fas fa-lock" style="color:var(--accent-red);"></i> Remaining EOL servers require client-coordinated change windows for OS upgrades</li>
-    <li><i class="fas fa-exclamation-circle" style="color:var(--accent-amber);"></i> KACE → Freshworks zero-touch patching pilot pending evaluation completion</li>
+    <li><i class="fas fa-exclamation-circle" style="color:var(--accent-amber);"></i> Zero-Touch Patching still in assessment — pending evaluation before pilot</li>
+    <li><i class="fas fa-exclamation-circle" style="color:var(--accent-amber);"></i> Self-Healing for Disk Utilization newly raised (25 May) — design/owner to be confirmed</li>
     <li><i class="fas fa-info-circle" style="color:var(--primary);"></i> FinOps, DevOps, SecOps maturity currently at 0 – investment needed to progress to Level 4</li>
    </ul>
   </div>
  </div>
 </div>
 
-<!-- ========== INCIDENTS (ITSM Intelligence) ========== -->
-<div class="section itsm-mod" id="incidents">
+<!-- ========== TICKET INTELLIGENCE (Incidents / Tasks / Changes) ========== -->
+<div class="section itsm-mod" id="ticketIntelligence">
  <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:14px;flex-wrap:wrap;">
   <div>
-   <h2 class="section-title"><i class="fas fa-exclamation-triangle"></i> Incident Intelligence</h2>
-   <p class="section-subtitle">Service Delivery Review &mdash; May 2026 &middot; 160 incidents raised in May (788 across the 6-month window) &mdash; source PKB_incident.xlsx.</p>
+   <h2 class="section-title"><i class="fas fa-ticket-alt"></i> Ticket Intelligence</h2>
+   <p class="section-subtitle">Service Delivery Review &mdash; May 2026 &middot; 160 incidents &middot; 5 tasks &middot; 17 changes raised in May (788 / 93 / 66 across the 6-month window) &mdash; source: PKB ServiceNow exports.</p>
   </div>
   <button class="btn" style="background:linear-gradient(135deg,#ffd23f,#f5a623);color:#0d1a2e;font-weight:700;align-self:center;" onclick="bbToggle(true)">
    <i class="fas fa-robot"></i> Ask Bumblebee Copilot
   </button>
  </div>
+ <div class="tab-bar">
+  <button class="tab-btn active" onclick="showTicketTab('ti-incidents',this)"><i class="fas fa-exclamation-triangle"></i> Incidents</button>
+  <button class="tab-btn" onclick="showTicketTab('ti-tasks',this)"><i class="fas fa-tasks"></i> Tasks</button>
+  <button class="tab-btn" onclick="showTicketTab('ti-changes',this)"><i class="fas fa-exchange-alt"></i> Changes</button>
+ </div>
+ <div class="tab-content active" id="ti-incidents">
  <div class="inc-tab">
 <div id="inc-upload-zone" style="margin-bottom:8px;">
  <!-- KPI strip (May 2026) -->
@@ -1424,12 +1497,9 @@ body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:var(--bg
 </div>
 </div>
  </div>
-</div>
+ </div><!-- end ti-incidents tab -->
 
-<!-- ========== TASKS (ITSM Intelligence) ========== -->
-<div class="section itsm-mod" id="tasks">
- <h2 class="section-title"><i class="fas fa-tasks"></i> Task Intelligence</h2>
- <p class="section-subtitle">Service Delivery Review &mdash; May 2026 &middot; 5 tasks raised in May (93 across the 6-month window) &mdash; source PKB_task.xlsx.</p>
+ <div class="tab-content" id="ti-tasks">
  <div class="task-tab">
 <div id="task-upload-zone" style="margin-bottom:8px;">
  <!-- KPI strip (May 2026) -->
@@ -1562,12 +1632,9 @@ body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:var(--bg
 </div>
 </div>
  </div>
-</div>
+ </div><!-- end ti-tasks tab -->
 
-<!-- ========== CHANGES (ITSM Intelligence) ========== -->
-<div class="section itsm-mod" id="changes">
- <h2 class="section-title"><i class="fas fa-exchange-alt"></i> Change Intelligence</h2>
- <p class="section-subtitle">Service Delivery Review &mdash; May 2026 &middot; 17 changes raised in May (66 across the 6-month window) &mdash; source PKB_change_request.xlsx.</p>
+ <div class="tab-content" id="ti-changes">
  <div class="chg-tab">
 <div id="chg-upload-zone" style="margin-bottom:8px;">
  <!-- KPI strip (May 2026) -->
@@ -1709,7 +1776,8 @@ body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:var(--bg
 </div>
 </div>
  </div>
-</div>
+ </div><!-- end ti-changes tab -->
+</div><!-- end #ticketIntelligence -->
 
 
 
@@ -2015,8 +2083,8 @@ body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:var(--bg
    <tr><td>1</td><td>Enforce LDAP Signing on Domain Controllers</td><td>Security</td><td>May 2026</td><td>Eliminates LDAP relay attack risk; aligns with Microsoft security baseline requirements</td><td>Portakabin &amp; Unisys</td><td><span class="badge badge-blue">Planned</span></td></tr>
    <tr><td>2</td><td>Upgrade Microsoft Edge to v148.0.3967.83</td><td>Security / Patch</td><td>May 2026</td><td>Closes known CVEs; ensures browser compliance across estate</td><td>Unisys</td><td><span class="badge badge-blue">Planned</span></td></tr>
    <tr><td>3</td><td>Complete OS Upgrade Programme for Remaining EOL Servers</td><td>Infra</td><td>May 2026</td><td>Reduces attack surface; eliminates unsupported OS risk from estate</td><td>Portakabin &amp; Unisys</td><td><span class="badge badge-amber">In Progress</span></td></tr>
-   <tr><td>4</td><td>Automate VPN Access &amp; Network Share Provisioning via Freshworks</td><td>Automation</td><td>May 2026</td><td>Reduces manual provisioning steps; improves SLA adherence and access delivery speed</td><td>Portakabin &amp; Unisys</td><td><span class="badge badge-amber">In Progress</span></td></tr>
-   <tr><td>5</td><td>KACE → Freshworks Zero Touch Patching Evaluation</td><td>Automation</td><td>May 2026</td><td>Improves patch compliance %; reduces manual effort; targets zero-touch pipeline</td><td>Unisys</td><td><span class="badge badge-gray">Evaluation</span></td></tr>
+   <tr><td>4</td><td>Exploring Zero Touch Patching</td><td>Infra</td><td>20 Jan 2026</td><td>Reduces manual effort and minimises patching errors being reported</td><td>Anindya</td><td><span class="badge badge-gray">Assessment</span></td></tr>
+   <tr><td>5</td><td>Self-Healing for Disk Utilization</td><td>Infra</td><td>25 May 2026</td><td>Automated remediation of disk-space alerts; reduces repetitive capacity incidents and toil</td><td>Unisys</td><td><span class="badge badge-blue">Proposed</span></td></tr>
   </tbody>
  </table></div>
 </div>
@@ -2178,7 +2246,8 @@ body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:var(--bg
     <tbody>
      <tr><td>1</td><td>Enforce LDAP Signing on Domain Controllers</td><td>Security</td><td>Eliminates LDAP relay risk; meets Microsoft baseline</td><td>Portakabin &amp; Unisys</td><td><span class="ep-badge ep-badge-amber">Planned</span></td></tr>
      <tr><td>2</td><td>Complete OS Upgrade for EOL Servers</td><td>Infra</td><td>Reduces attack surface; removes unsupported OS risk</td><td>Portakabin &amp; Unisys</td><td><span class="ep-badge ep-badge-amber">In Progress</span></td></tr>
-     <tr><td>3</td><td>KACE → Freshworks Zero Touch Patching</td><td>Automation</td><td>Improved patch compliance; zero-touch pipeline</td><td>Unisys</td><td><span class="ep-badge ep-badge-amber">Evaluation</span></td></tr>
+     <tr><td>3</td><td>Exploring Zero Touch Patching</td><td>Infra</td><td>Reduces manual effort; minimises patching errors</td><td>Anindya</td><td><span class="ep-badge ep-badge-amber">Assessment</span></td></tr>
+     <tr><td>4</td><td>Self-Healing for Disk Utilization</td><td>Infra</td><td>Automated remediation of disk alerts; cuts repetitive incidents</td><td>Unisys</td><td><span class="ep-badge ep-badge-amber">Proposed</span></td></tr>
     </tbody>
    </table>
   </div>
@@ -2207,13 +2276,13 @@ body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:var(--bg
      </div>
      <span class="ep-esc-arrow">&rarr;</span>
      <div class="ep-esc-box">
-      <div class="ep-esc-title">Team DLs</div>
-      <div class="ep-esc-body">DysonWindows@<br>DysonCloudOps@<br>DysonVDISupport@</div>
+      <div class="ep-esc-title">Team DL</div>
+      <div class="ep-esc-body">PortakabinHCloudInfraSupport@unisys.com</div>
      </div>
      <span class="ep-esc-arrow">&rarr;</span>
      <div class="ep-esc-box">
-      <div class="ep-esc-title">Team Leads</div>
-      <div class="ep-esc-body">Anindya G. (Server)<br>Zubair J. (Server)<br>Hafsa A. (VDI)</div>
+      <div class="ep-esc-title">Team Lead</div>
+      <div class="ep-esc-body">Anindya Ghosh<br><span style="font-size:5px;color:#999;">Anindya.Ghosh@unisys.com</span></div>
      </div>
     </div>
     <!-- Escalation label -->
@@ -2243,6 +2312,13 @@ body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:var(--bg
  <div class="ep-footer">Confidential &ndash; Unisys &nbsp;|&nbsp; Generated from SDR Interactive Dashboard &nbsp;|&nbsp; Portakabin Hybrid Cloud Operations &nbsp;|&nbsp; May 2026</div>
 </div>
 
+ <div style="margin:26px 4px 10px;padding:12px 16px;border-top:1px solid var(--border);font-size:11px;color:var(--text-light);line-height:1.7;">
+  <i class="fas fa-database" style="color:var(--primary);"></i>
+  <b>Data sources:</b> Portakabin SDR_Hybrid Cloud Operations_May-2026.pptx (20 slides) &middot;
+  PKB_incident.xlsx (788 rows) &middot; PKB_task.xlsx (93 rows) &middot; PKB_change_request.xlsx (66 rows).
+  &nbsp;|&nbsp; <b>Generated:</b> 22 Jun 2026 by Creator (SDR Interactive Dashboard V16).
+  &nbsp;|&nbsp; Confidential &ndash; Unisys. Every figure derives from the uploaded source files; cells shown as &ldquo;TBC&rdquo; were blank in the source deck.
+ </div>
  </div><!-- end content -->
 </div><!-- end main -->
 
@@ -3231,6 +3307,21 @@ function showTab(id, el) {
  el.classList.add('active');
 }
 
+/* Ticket Intelligence — switch tab + lazily build that tab's "May 2026" charts.
+   Charts built while their pane is display:none render at 0×0, so each tab's
+   chart set is built the first time the tab becomes visible. */
+function buildTicketCharts(tabId){
+ const map={'ti-incidents':'initIncidentsMay','ti-tasks':'initTasksMay','ti-changes':'initChangesMay'};
+ const fn=map[tabId]; if(!fn) return;
+ window.__tiBuilt = window.__tiBuilt || {};
+ if(window.__tiBuilt[tabId]) return;
+ if(typeof window[fn]==='function'){ try{ window[fn](); window.__tiBuilt[tabId]=true; }catch(e){ console.error(fn,e); } }
+}
+function showTicketTab(id, el){
+ showTab(id, el);
+ setTimeout(()=>buildTicketCharts(id), 30);
+}
+
 function markFile(input, statusId) {
  if(input.files.length > 0) document.getElementById(statusId).style.display = 'block';
 }
@@ -3398,6 +3489,38 @@ function filterChanges() {
 }
 
 // ========== INIT STATIC CHARTS ==========
+/* Leadership Summary — MTTR cube: pre-aggregated [sumDays,count] per
+   month × assignment group × auto-resolved (auto = Close code "Solved Remotely
+   (Permanently)"). Lets the MTTR trend recompute client-side for the filters
+   without embedding all 788 raw rows. Derived from PKB_incident.xlsx. */
+const LSMTTR = {"months":["Jan-26","Feb-26","Mar-26","Apr-26","May-26","Jun-26"],"groups":["Unisys HybridCloud - UIS - PKB","Backup-APAC-IND","Other"],"buckets":[[[[169.2773,39],[40.33,75]],[[15.2372,5],[0.0,0]],[[0.0,0],[0.0,0]]],[[[56.0475,27],[14.7009,63]],[[8.2224,3],[0.0,0]],[[0.0,0],[0.0,0]]],[[[76.4617,17],[54.776,141]],[[2.2202,1],[0.0,0]],[[0.0,0],[0.0,0]]],[[[91.8654,22],[84.0595,161]],[[0.8725,1],[0.0,0]],[[0.0,0],[0.0,0]]],[[[18.4357,8],[40.479,147]],[[9.2856,4],[0.0,0]],[[0.0,0],[0.0,0]]],[[[11.0631,6],[23.086,62]],[[1.9564,1],[0.0,0]],[[0.0,0],[0.0,0]]]]};
+function lsComputeMttr(groupSel, autoMode){
+ return LSMTTR.months.map((m,mi)=>{
+  let sum=0,cnt=0;
+  for(let gi=0; gi<LSMTTR.groups.length; gi++){
+   if(groupSel!==-1 && gi!==groupSel) continue;
+   for(let ai=0; ai<2; ai++){
+    if(autoMode==='auto' && ai!==1) continue;
+    if(autoMode==='noauto' && ai!==0) continue;
+    const b=LSMTTR.buckets[mi][gi][ai];
+    sum+=b[0]; cnt+=b[1];
+   }
+  }
+  return cnt ? +(sum/cnt).toFixed(2) : null;
+ });
+}
+function lsRenderMttr(){
+ if(!charts.lsMttr) return;
+ const autoMode=(document.getElementById('ls-mttr-auto')||{}).value||'all';
+ const gv=(document.getElementById('ls-mttr-group')||{}).value;
+ const groupSel=(gv===undefined||gv==='')?-1:parseInt(gv,10);
+ charts.lsMttr.data.datasets[0].data=lsComputeMttr(groupSel,autoMode);
+ const gl = groupSel===-1 ? 'All groups' : LSMTTR.groups[groupSel];
+ const al = autoMode==='auto' ? 'auto-resolved only' : autoMode==='noauto' ? 'excl. auto-resolved' : 'all incidents';
+ charts.lsMttr.data.datasets[0].label='MTTR (days) — '+gl+' · '+al;
+ charts.lsMttr.update();
+}
+
 function initCharts() {
  // FTE Trend
  charts.fteTrend=new Chart(document.getElementById('fteTrendChart'),{
@@ -3421,19 +3544,19 @@ function initCharts() {
   options:{responsive:true,plugins:{legend:{position:'bottom'}},scales:{y:{beginAtZero:true,title:{display:true,text:'USD ($)'}}}}
  });
 
- // Domain Volume
+ // Domain Volume (asset volume by supported domain — Service Performance, RU billing)
  charts.domainVol=new Chart(document.getElementById('domainVolumeChart'),{
   type:'bar',
-  data:{labels:['Windows Servers','Unix Servers','Hypervisors','Cloud – Windows','Backup Targets','Network'],
-   datasets:[{label:'Asset Count',data:[315,80,164,23,205,1763],backgroundColor:['#007272','#00A39A','#0B2D5B','#3498db','#f39c12','#27ae60']}]},
-  options:{responsive:true,indexAxis:'y',plugins:{legend:{display:false}},scales:{x:{beginAtZero:true,title:{display:true,text:'Asset Count'}}}}
+  data:{labels:['Capacity Management','Windows Servers','Backup Targets','Database Mgmt','Cloud – Windows','Active Directory'],
+   datasets:[{label:'Volume',data:[77,69,57,16,10,8],backgroundColor:['#007272','#00A39A','#f39c12','#0B2D5B','#3498db','#27ae60']}]},
+  options:{responsive:true,indexAxis:'y',plugins:{legend:{display:false}},scales:{x:{beginAtZero:true,title:{display:true,text:'Volume (units in scope)'}}}}
  });
 
- // Domain FTE
+ // Domain FTE (# FTE charged by domain — 550D)
  charts.domainFTE=new Chart(document.getElementById('domainFTEChart'),{
   type:'doughnut',
-  data:{labels:['Windows Servers (3.75)','Unix Servers','Hypervisors','Cloud – Windows (0.04)','Backup Targets (0.31)','Network (3.03)'],
-   datasets:[{data:[3.75,0.31,0.59,0.04,0.31,3.03],backgroundColor:['#007272','#00A39A','#0B2D5B','#3498db','#f39c12','#27ae60']}]},
+  data:{labels:['Windows Servers (1.01)','Backup Targets (0.24)','Database Mgmt (0.20)','Active Directory (0.06)','Capacity Mgmt (0.03)'],
+   datasets:[{data:[1.01,0.24,0.20,0.06,0.03],backgroundColor:['#007272','#f39c12','#0B2D5B','#27ae60','#00A39A']}]},
   options:{responsive:true,plugins:{legend:{position:'bottom'}}}
  });
 
@@ -3444,6 +3567,53 @@ function initCharts() {
    datasets:[{data:[66.67,26.67,6.67],backgroundColor:['#007272','#00A39A','#0B2D5B']}]},
   options:{responsive:true,plugins:{legend:{position:'bottom'}}}
  });
+
+ // ===== Leadership Summary — FTE Trend (Actual vs FACT) =====
+ if(document.getElementById('ls-fte-trend')){
+  charts.lsFteTrend=new Chart(document.getElementById('ls-fte-trend'),{
+   type:'line',
+   data:{labels:['Jan-26','Feb-26','Mar-26','Apr-26','May-26'],
+    datasets:[
+     {label:'Actual FTE',data:[1.74,1.73,1.96,2.33,2.30],borderColor:'#007272',backgroundColor:'rgba(0,114,114,0.1)',fill:true,tension:0.3,pointRadius:5},
+     {label:'FACT FTE',data:[1.64,1.64,1.64,1.64,1.64],borderColor:'#e74c3c',borderDash:[5,5],fill:false,tension:0,pointRadius:3}
+    ]},
+   options:{responsive:true,plugins:{legend:{position:'bottom'}},scales:{y:{beginAtZero:false,title:{display:true,text:'FTE Count'}}}}
+  });
+ }
+ // ===== Leadership Summary — FTE Cost Trend =====
+ if(document.getElementById('ls-fte-cost')){
+  charts.lsFteCost=new Chart(document.getElementById('ls-fte-cost'),{
+   type:'bar',
+   data:{labels:['Jan-26','Feb-26','Mar-26','Apr-26','May-26'],
+    datasets:[
+     {label:'FACT Cost ($)',data:[3469.09,3469.09,3469.09,3469.09,3469.09],backgroundColor:'rgba(0,114,114,0.3)',borderColor:'#007272',borderWidth:1},
+     {label:'Deployed Cost ($)',data:[3316.93,4705.48,5658.00,8383.70,8299.33],backgroundColor:'rgba(39,174,96,0.5)',borderColor:'#27ae60',borderWidth:1}
+    ]},
+   options:{responsive:true,plugins:{legend:{position:'bottom'}},scales:{y:{beginAtZero:true,title:{display:true,text:'USD ($)'}}}}
+  });
+ }
+ // ===== Leadership Summary — Incident MTTR Trend (days), filterable by auto-resolved & group =====
+ if(document.getElementById('ls-mttr-trend')){
+  const gsel=document.getElementById('ls-mttr-group');
+  if(gsel && gsel.options.length<=1){
+   LSMTTR.groups.forEach((g,i)=>{ if(g==='Other') return; const o=document.createElement('option'); o.value=i; o.textContent=g; gsel.appendChild(o); });
+  }
+  charts.lsMttr=new Chart(document.getElementById('ls-mttr-trend'),{
+   type:'line',
+   data:{labels:LSMTTR.months,
+    datasets:[{label:'MTTR (days) — All groups · all incidents',data:lsComputeMttr(-1,'all'),borderColor:'#007272',backgroundColor:'rgba(0,114,114,0.12)',fill:true,tension:0.35,pointRadius:4,borderWidth:2,spanGaps:true}]},
+   options:{responsive:true,plugins:{legend:{position:'bottom'}},scales:{y:{beginAtZero:true,title:{display:true,text:'Days to resolve'}}}}
+  });
+ }
+ // ===== Leadership Summary — Aging open incidents by age =====
+ if(document.getElementById('ls-aging-bar')){
+  charts.lsAging=new Chart(document.getElementById('ls-aging-bar'),{
+   type:'bar',
+   data:{labels:['0–2 days','2–5 days','5–10 days','>10 days'],
+    datasets:[{label:'Open incidents',data:[0,0,19,14],backgroundColor:['#27ae60','#f1c40f','#e67e22','#e74c3c'],borderRadius:6}]},
+   options:{responsive:true,indexAxis:'y',plugins:{legend:{display:false}},scales:{x:{beginAtZero:true,title:{display:true,text:'Open incidents by age'}}}}
+  });
+ }
 
  // (Incident / Change volume trends moved to the redesigned Incidents & Changes sections)
 }
@@ -4620,14 +4790,14 @@ const DEFAULT_TEAM = [
   ['Designation','Name'],
   ['Director – CAI Cloud Transformation Services','Gupta, Ankur'],
   ['Delivery Manager – Hybrid Cloud','Lloyd Isaac'],
-  ['Primary SPOC','P V S S R Anjaneyulu'],
-  ['Secondary SPOC','Kulkarni Gurudatt'],
+  ['Primary SPOC','Ghosh Anindya'],
+  ['Secondary SPOC','Javeed Zubair'],
   ['Team member','Mahesh Meghana B M'],['Team member','V N Bhumika'],
-  ['Team member','Kolipakula Anitha'],['Team member','Javeed Zubair'],
-  ['Team member','Soni Anshu'],['Team member','Kunchala Tanuja'],
-  ['Team member','Kottamasu Naga Venkata Jyothi'],['Team member','S Shiva'],
-  ['Team member','Ghosh Anindya'],['Team member','S Shruti'],
-  ['Team member','P Keerthi'],['Team member','Sahu Rishik']
+  ['Team member','Kolipakula Anitha'],['Team member','Soni Anshu'],
+  ['Team member','Kunchala Tanuja'],['Team member','Kottamasu Naga Venkata Jyothi'],
+  ['Team member','S Shiva'],['Team member','Kulkarni Gurudatt'],
+  ['Team member','S Shruti'],['Team member','P Keerthi'],
+  ['Team member','Sahu Rishik']
 ];
 const DEFAULT_ESC = [
   ['Description','Team/DL - Contact'],
@@ -5101,7 +5271,7 @@ document.addEventListener('DOMContentLoaded', function() {
 /* Show/hide the floating launch button based on active section */
 function bbWireNav(){
   const launch=document.getElementById('bbLaunch');
-  const sync=()=>{ const inc=document.getElementById('incidents'); const on = inc && inc.classList.contains('active'); if(launch) launch.style.display = on ? 'inline-flex' : 'none'; if(!on) bbToggle(false); };
+  const sync=()=>{ const ti=document.getElementById('ticketIntelligence'); const on = ti && ti.classList.contains('active'); if(launch) launch.style.display = on ? 'inline-flex' : 'none'; if(!on) bbToggle(false); };
   // wrap existing showSection so the button follows navigation
   if(typeof window.showSection==='function' && !window.__bbWrappedNav){
     const orig=window.showSection;
@@ -5116,16 +5286,18 @@ function bbWireNav(){
    time that section becomes visible. */
 function wireItsmChartResize(){
   if(window.__itsmResizeWrapped) return;
-  const initFns={incidents:'initIncidentsMay', tasks:'initTasksMay', changes:'initChangesMay'};
-  const done={};
-  const build=(id)=>{
-    const fn=initFns[id]; if(!fn || done[id]) return;
-    if(typeof window[fn]==='function'){ try{ window[fn](); done[id]=true; }catch(e){ console.error(fn, e); } }
-  };
+  // All three ITSM views now live as tabs inside #ticketIntelligence. When that
+  // section becomes visible, build whichever ticket tab is currently active
+  // (Incidents by default); tab switches are handled by showTicketTab().
   if(typeof window.showSection==='function'){
     const orig=window.showSection;
     window.showSection=function(id,el){ orig(id,el);
-      setTimeout(()=>build(id),30);
+      if(id==='ticketIntelligence'){
+        setTimeout(()=>{
+          const act=document.querySelector('#ticketIntelligence .tab-content.active');
+          buildTicketCharts(act ? act.id : 'ti-incidents');
+        },40);
+      }
     };
   }
   window.__itsmResizeWrapped=true;
