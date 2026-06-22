@@ -1,0 +1,10 @@
+{
+  "name": "creator",
+  "description": "Creator — Executive Dashboard Architect. Ingests a raw data file (ITSM incidents/tasks/changes, FTE/billing, service performance, team/HR, or mixed), profiles it, frames an executive narrative (headline metric, overall RAG, three key insights, trend direction), then populates the fixed sections and component library of the bundled SDR Interactive Dashboard Template (V16) with real values — KPI cards, RAG badges, tables, Chart.js charts, lead/escalation cards and ITSM modules — preserving the Bumblebee Copilot panel and the XLSX upload feature, and delivers a single self-contained interactive HTML dashboard.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Lloyd Isaac",
+    "email": "lloyd.isaac@unisys.com"
+  },
+  "keywords": ["dashboard", "executive-reporting", "sdr", "itsm", "kpi", "data-visualization", "chartjs", "service-delivery-review", "fte", "service-performance"]
+}

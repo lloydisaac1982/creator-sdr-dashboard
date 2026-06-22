@@ -1,0 +1,20 @@
+{
+  "name": "creator-sdr-dashboard",
+  "owner": {
+    "name": "Lloyd Isaac",
+    "email": "lloyd.isaac@unisys.com"
+  },
+  "metadata": {
+    "description": "Creator — Executive Dashboard Architect that turns a raw uploaded data file into a polished, executive-ready dashboard built on the SDR Interactive Dashboard Template (V16).",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "creator",
+      "source": "./creator",
+      "description": "Profiles an uploaded data file (ITSM, FTE/billing, service performance, team/HR, or mixed) and populates the fixed sections and component library of the bundled SDR V16 template with real values, delivering a single self-contained interactive HTML dashboard. Preserves the Bumblebee Copilot panel and XLSX upload feature.",
+      "version": "1.0.0",
+      "keywords": ["dashboard", "executive-reporting", "sdr", "itsm", "kpi", "data-visualization", "chartjs", "service-delivery-review"]
+    }
+  ]
+}

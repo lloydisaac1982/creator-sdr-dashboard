@@ -1,0 +1,26 @@
+# Generated dashboards (client-specific output — do not commit)
+sdr-dashboard-*.html
+*-dashboard-output.html
+
+# Source data inputs (keep confidential client data out of the repo)
+*.csv
+*.xlsx
+*.xls
+*.json
+!**/.claude-plugin/*.json
+!**/plugin.json
+!**/marketplace.json
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+.vscode/
+.idea/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
