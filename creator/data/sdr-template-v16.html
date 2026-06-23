@@ -5262,7 +5262,11 @@ function initChangesMay(){
 
 // ========== INIT ==========
 document.addEventListener('DOMContentLoaded', function() {
- initCharts();
+ try { initCharts(); } catch(e){ console.error('initCharts', e); }
+ // Sync the Leadership Summary filters on load so the Financial (Domain) and
+ // Incident (Assignment-group / Auto-resolved) snapshots reflect their selectors.
+ try { lsRenderFin(); } catch(e){ console.error('lsRenderFin', e); }
+ try { lsRenderIncident(); } catch(e){ console.error('lsRenderIncident', e); }
  // Incident/Task/Change "May 2026" charts are initialised lazily on first view
  // (see wireItsmChartResize) so they size correctly instead of rendering at 0×0 while hidden.
  // Render recreated sections (Team Structure + Escalation) in their new formats using default data
