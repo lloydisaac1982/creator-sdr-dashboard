@@ -48,18 +48,21 @@ Activate and populate based on the uploaded data — never ask the user which to
 
 | Section ID           | Section Name         | Purpose |
 |----------------------|----------------------|---------|
-| `leadershipSummary`  | Leadership Summary   | **Default landing section (V16.1).** One-glance executive snapshot: Snapshot of Highlights, Financial Snapshot (KPIs + FTE Trend & FTE Cost charts), Innovation Snapshot, Incident Snapshot (KPIs + filterable MTTR trend + aging chart) |
+| `leadershipSummary`  | Leadership Summary   | **Default landing section.** One-glance executive snapshot: **Snapshot of Highlights + Risks & Issues** (side-by-side `grid-2`), Financial Snapshot (KPIs + FTE Trend & FTE Cost charts), **Innovation Roadmap** (compact FY26 quarter table), Incident Snapshot (KPIs + filterable MTTR trend + aging chart) |
 | `execSummary`        | Executive Summary    | Headline KPIs, RAG strip, highlights/lowlights/focus; tabbed Overview / Innovation / Finance |
 | `financial`          | Financial Overview   | TCV, FTE cost, run-rate; FTE trend + cost charts |
 | `servicePerf`        | Service Performance  | Domain KPIs, RU billing, asset volumes |
 | `people`             | People & Capability  | Labor pyramid, certifications, cross-skilling |
-| `innovation`         | Innovation & CIPs    | Intelligent Ops maturity, CIP register |
+| `innovation`         | Innovation Roadmap   | **FY26 quarterly roadmap (V16.2)** — quarter-lane timeline of innovation initiatives + benefits (card-free table). Replaces the old "Innovation & CIPs" register |
 | `ticketIntelligence` | Ticket Intelligence  | **Merged ITSM module (V16.1)** with three tabs — **Incidents / Tasks / Changes** (P1–P4 volume, trend, aging, SLA, backlog, change types). Tabs use `showTicketTab()`; each tab's charts build lazily on first view |
+| `projects`           | Projects             | **Project inventory + cost graphs (V16.2)** — KPI strip, One-Time & Recurring cost-by-project bar charts, status doughnut, full inventory table. Charts build lazily via `initProjectCharts()` on first view |
 | `teamStructure`      | Team Structure       | Role-grouped directory, lead cards, member grid |
 | `escalation`         | Escalation Matrix    | Tiered escalation ladder + contacts |
 | `accolades`          | Accolades            | Achievements, recognition, wins |
 
 > **V16.1 structural notes:** (1) `leadershipSummary` is the first/active section on load — always populate it. (2) The three former ITSM sections (`incidents`/`tasks`/`changes`) are now **tabs inside `ticketIntelligence`**, not standalone sections. (3) The standalone **Data Upload** section has been **removed** — dashboards are delivered as fixed artifacts populated at generation time (hidden element stubs remain so the save/load-state JS stays null-safe). The Bumblebee Copilot panel is preserved and now keys off `#ticketIntelligence`.
+>
+> **V16.2 structural notes:** (1) The `innovation` section is now an **Innovation Roadmap** — a card-free quarter-lane table (Q1–Q4) of initiatives + benefits; the old CIP register / deep-dive / completed-innovations blocks are gone. (2) The `projects` section is **cost-led** — `initProjectCharts()` lazy-builds One-Time cost, Recurring cost, and status charts (same hidden-section lazy pattern as Ticket Intelligence). (3) The Leadership Summary leads with **Highlights + Risks & Issues side-by-side** and shows a **compact Innovation Roadmap** in place of the former Innovation Snapshot.
 
 ### Pre-Built Component Library (USE THESE — DO NOT CREATE NEW ONES)
 
@@ -187,7 +190,7 @@ If any check fails, revise before delivering.
 ## Output Format
 Deliver a **complete, self-contained HTML file** — a direct modification of the SDR V16 template — written to disk with the Write tool (e.g. `sdr-dashboard-<account>.html`), and tell the user the path. It must preserve:
 - All original CDN links: Font Awesome 6.5.1, Google Fonts (Space Grotesk + JetBrains Mono), Chart.js 4.4.1, SheetJS (xlsx) 0.18.5, JSZip 3.10.1.
-- All original JS functions intact (`mkChart`, `showSection`, `showTab`, `showTicketTab`/`buildTicketCharts` (Ticket Intelligence tab switching + lazy chart build), `lsComputeMttr`/`lsRenderMttr` (Leadership Summary MTTR filters), `applyTeamStructure`, `applyEscalation`, `loadSavedData`, `bbSetStatus`, `bbWireNav`, `wireItsmChartResize`, the `initCharts` (now also builds the Leadership Summary FTE/MTTR/aging charts) / `initIncidentsMay` / `initTasksMay` / `initChangesMay` chart inits).
+- All original JS functions intact (`mkChart`, `showSection`, `showTab`, `showTicketTab`/`buildTicketCharts` (Ticket Intelligence tab switching + lazy chart build), `initProjectCharts` (Projects cost/status charts, lazy-built on first view), `lsComputeMttr`/`lsRenderMttr` (Leadership Summary MTTR filters), `applyTeamStructure`, `applyEscalation`, `loadSavedData`, `bbSetStatus`, `bbWireNav`, `wireItsmChartResize`, the `initCharts` (now also builds the Leadership Summary FTE/MTTR/aging charts) / `initIncidentsMay` / `initTasksMay` / `initChangesMay` chart inits).
 - The print-friendly layout via the existing `@media print` rules.
 - A subtle footer note with: data source filename, row count processed, and dashboard generation timestamp.
 

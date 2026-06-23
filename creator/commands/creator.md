@@ -30,9 +30,12 @@ This is the **main conversation thread**, so run onboarding interactively.
 2. Frame the executive narrative: headline metric, overall RAG, 3 key insights, trend direction.
 3. Populate the SDR V16 template section by section using only its existing components and JS
    functions; fill every chart-init with real values; mirror the top KPIs into `#execPdfPage`;
-   preserve the Bumblebee Copilot panel (update `bbDataTagText`). Build on the **V16.1 structure**:
-   `leadershipSummary` is the default landing section, and Incidents/Tasks/Changes are **tabs inside
-   the merged `ticketIntelligence` section** (the standalone Data Upload section has been removed).
+   preserve the Bumblebee Copilot panel (update `bbDataTagText`). Build on the **V16.2 structure**:
+   `leadershipSummary` is the default landing section (Highlights + Risks & Issues side-by-side, FTE
+   trend/cost charts, compact Innovation Roadmap, Incident snapshot with filterable MTTR); Incidents/
+   Tasks/Changes are **tabs inside the merged `ticketIntelligence` section**; `innovation` is a
+   quarter-lane **Innovation Roadmap**; `projects` is **cost-led** with lazy-built cost/status charts
+   (the standalone Data Upload section has been removed).
 4. Run the Quality Gate self-audit, then **lead with the dashboard**: write the complete
    self-contained HTML to disk (e.g. `sdr-dashboard-<account>.html`) and tell the user the path.
    Add the footer note (source filename, row count, generation timestamp).

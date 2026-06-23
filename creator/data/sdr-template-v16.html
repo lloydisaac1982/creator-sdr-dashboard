@@ -808,7 +808,7 @@ body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:var(--bg
   <a href="#" onclick="showSection('financial',this)"><i class="fas fa-dollar-sign"></i>Financial Overview</a>
   <a href="#" onclick="showSection('servicePerf',this)"><i class="fas fa-tachometer-alt"></i>Service Performance</a>
   <a href="#" onclick="showSection('people',this)"><i class="fas fa-users"></i>People & Capability</a>
-  <a href="#" onclick="showSection('innovation',this)"><i class="fas fa-lightbulb"></i>Innovation & CIPs</a>
+  <a href="#" onclick="showSection('innovation',this)"><i class="fas fa-road"></i>Innovation Roadmap</a>
   <a href="#" onclick="showSection('ticketIntelligence',this)"><i class="fas fa-ticket-alt"></i>Ticket Intelligence</a>
   <a href="#" onclick="showSection('projects',this)"><i class="fas fa-project-diagram"></i>Projects</a>
   <a href="#" onclick="showSection('demographics',this)"><i class="fas fa-server"></i>Account Demographics</a>
@@ -851,17 +851,28 @@ body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:var(--bg
  <h2 class="section-title"><i class="fas fa-crown"></i> Leadership Summary</h2>
  <p class="section-subtitle">One-glance executive snapshot &mdash; <span class="acct-name">Portakabin</span> <span class="ops-name">Hybrid Cloud Operations</span> &middot; <span class="period-name">May 2026</span> &middot; Overall service health: <span class="rag rag-green">GREEN</span></p>
 
- <!-- ===== Snapshot of Highlights ===== -->
- <div class="highlight-box" style="border-left:4px solid var(--accent-green);">
-  <h4><i class="fas fa-star" style="color:#f1c40f;"></i> Snapshot of Highlights</h4>
-  <ul>
-   <li><i class="fas fa-check-circle" style="color:var(--accent-green);"></i> Monthly patching completed with <b>100% compliance</b></li>
-   <li><i class="fas fa-check-circle" style="color:var(--accent-green);"></i> In-Place OS upgrades: <b>SAP-PKD</b> &amp; <b>SAP-PKQ</b> moved from Windows Server 2008 &rarr; 2012</li>
-   <li><i class="fas fa-check-circle" style="color:var(--accent-green);"></i> Decommissioned EOL servers <b>ptkcelnprd01</b> &amp; <b>ptkcelnprdmgt01</b></li>
-   <li><i class="fas fa-check-circle" style="color:var(--accent-green);"></i> Security hardening: legacy RSA GPOs de-linked, Wireshark removed (3 servers), speculative-execution patches applied</li>
-   <li><i class="fas fa-check-circle" style="color:var(--accent-green);"></i> <b>SnowInventory V7.5.0</b> deployed across 2012 estate; DFS secondary target enabled for German Share</li>
-   <li><i class="fas fa-exclamation-circle" style="color:var(--accent-amber);"></i> <b>Watch:</b> OS upgrade of remaining EOL servers still outstanding &mdash; remediation in progress</li>
-  </ul>
+ <!-- ===== Snapshot of Highlights + Risks & Issues ===== -->
+ <div class="grid-2">
+  <div class="highlight-box" style="border-left:4px solid var(--accent-green);">
+   <h4><i class="fas fa-star" style="color:#f1c40f;"></i> Snapshot of Highlights</h4>
+   <ul>
+    <li><i class="fas fa-check-circle" style="color:var(--accent-green);"></i> Monthly patching completed with <b>100% compliance</b></li>
+    <li><i class="fas fa-check-circle" style="color:var(--accent-green);"></i> In-Place OS upgrades: <b>SAP-PKD</b> &amp; <b>SAP-PKQ</b> moved from Windows Server 2008 &rarr; 2012</li>
+    <li><i class="fas fa-check-circle" style="color:var(--accent-green);"></i> Decommissioned EOL servers <b>ptkcelnprd01</b> &amp; <b>ptkcelnprdmgt01</b></li>
+    <li><i class="fas fa-check-circle" style="color:var(--accent-green);"></i> Security hardening: legacy RSA GPOs de-linked, Wireshark removed (3 servers), speculative-execution patches applied</li>
+    <li><i class="fas fa-check-circle" style="color:var(--accent-green);"></i> <b>SnowInventory V7.5.0</b> deployed across 2012 estate; DFS secondary target enabled for German Share</li>
+    <li><i class="fas fa-exclamation-circle" style="color:var(--accent-amber);"></i> <b>Watch:</b> OS upgrade of remaining EOL servers still outstanding &mdash; remediation in progress</li>
+   </ul>
+  </div>
+  <div class="highlight-box" style="border-left:4px solid var(--accent-red);">
+   <h4><i class="fas fa-shield-alt" style="color:var(--accent-red);"></i> Risks &amp; Issues</h4>
+   <ul>
+    <li><i class="fas fa-circle" style="color:var(--accent-red);"></i> EOL servers (Windows Server 2008) &mdash; OS upgrade outstanding; unsupported &amp; vulnerable <span class="badge badge-red">High</span> <span class="badge badge-amber">WIP</span></li>
+    <li><i class="fas fa-circle" style="color:var(--accent-red);"></i> Multiple EOL OS versions (2008 / 2012 / 2012R2) still in estate <span class="badge badge-red">High</span> <span class="badge badge-amber">WIP</span></li>
+    <li><i class="fas fa-circle" style="color:var(--accent-amber);"></i> LDAP Signing not yet enforced on Domain Controllers &mdash; compliance gap <span class="badge badge-red">High</span> <span class="badge badge-blue">Planned</span></li>
+    <li><i class="fas fa-circle" style="color:var(--accent-amber);"></i> Microsoft Edge not on latest version (148.0.3967.83) across estate <span class="badge badge-amber">Medium</span> <span class="badge badge-blue">Planned</span></li>
+   </ul>
+  </div>
  </div>
 
  <!-- ===== Financial Snapshot ===== -->
@@ -881,20 +892,22 @@ body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:var(--bg
   <div class="chart-box"><h4><i class="fas fa-money-bill-trend-up"></i> FTE Cost Trend</h4><canvas id="ls-fte-cost"></canvas></div>
  </div>
 
- <!-- ===== Innovation Snapshot ===== -->
- <h4 style="margin:16px 0 8px;color:var(--primary);"><i class="fas fa-lightbulb"></i> Innovation Snapshot</h4>
- <div class="kpi-grid">
-  <div class="kpi-card blue"><div class="kpi-icon"><i class="fas fa-robot"></i></div><div class="kpi-label">Active CIP Activities</div><div class="kpi-value">2</div></div>
-  <div class="kpi-card amber"><div class="kpi-icon"><i class="fas fa-cog"></i></div><div class="kpi-label">Tasks Codified</div><div class="kpi-value">8 / 13</div></div>
-  <div class="kpi-card green"><div class="kpi-icon"><i class="fas fa-award"></i></div><div class="kpi-label">Completed Innovations</div><div class="kpi-value">6</div></div>
-  <div class="kpi-card"><div class="kpi-icon"><i class="fas fa-chart-line"></i></div><div class="kpi-label">Intelligent Ops Score</div><div class="kpi-value">17 / L3</div></div>
- </div>
- <div class="highlight-box" style="margin-bottom:18px;">
-  <ul>
-   <li><i class="fas fa-robot" style="color:var(--primary);"></i> <b>Enterprise AI Integration via MCP</b> (Boomi &amp; SAP) &mdash; ~40% projected cut in integration build/lead time</li>
-   <li><i class="fas fa-certificate" style="color:var(--accent-blue);"></i> <b>ADCS Certificate-Expiry Automation</b> (Ansible + ServiceNow) &mdash; 5/5 tasks codified; targets ~100% prevention of cert-expiry outages</li>
-  </ul>
- </div>
+ <!-- ===== Innovation Roadmap ===== -->
+ <h4 style="margin:16px 0 8px;color:var(--primary);"><i class="fas fa-road"></i> Innovation Roadmap (FY26)</h4>
+ <div class="table-container" style="margin-bottom:18px;"><table>
+  <thead><tr>
+   <th style="width:25%;">Q1 2026 &middot; Jan&ndash;Mar</th>
+   <th style="width:25%;">Q2 2026 &middot; Apr&ndash;Jun</th>
+   <th style="width:25%;">Q3 2026 &middot; Jul&ndash;Sep</th>
+   <th style="width:25%;">Q4 2026 &middot; Oct&ndash;Dec</th>
+  </tr></thead>
+  <tbody><tr>
+   <td style="vertical-align:top;color:var(--text-light);">No items scheduled</td>
+   <td style="vertical-align:top;color:var(--text-light);">No items scheduled</td>
+   <td style="vertical-align:top;"><i class="fas fa-circle" style="color:var(--accent-blue);font-size:7px;vertical-align:middle;"></i> Self-Healing for Disk Utilization<br><i class="fas fa-circle" style="color:var(--accent-blue);font-size:7px;vertical-align:middle;"></i> Agentic AI Database Agent</td>
+   <td style="vertical-align:top;"><i class="fas fa-circle" style="color:var(--accent-amber);font-size:7px;vertical-align:middle;"></i> Enterprise AI Integration via MCP (Boomi &amp; SAP)<br><i class="fas fa-circle" style="color:var(--accent-green);font-size:7px;vertical-align:middle;"></i> ADCS Cert Expiry Notifications</td>
+  </tr></tbody>
+ </table></div>
 
  <!-- ===== Incident Snapshot ===== -->
  <h4 style="margin:16px 0 8px;color:var(--primary);"><i class="fas fa-exclamation-triangle"></i> Incident Snapshot</h4>
@@ -978,7 +991,7 @@ body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:var(--bg
      <li><i class="fas fa-arrow-right" style="color:var(--primary);"></i> Enforcement of LDAP Signing Requirement on Domain Controllers</li>
      <li><i class="fas fa-arrow-right" style="color:var(--primary);"></i> Upgrade Microsoft Edge to the latest available version (148.0.3967.83)</li>
      <li><i class="fas fa-arrow-right" style="color:var(--primary);"></i> Continue OS upgrade programme for remaining EOL servers</li>
-     <li><i class="fas fa-arrow-right" style="color:var(--primary);"></i> More Innovations in progress – see Innovation &amp; CIPs section for full details</li>
+     <li><i class="fas fa-arrow-right" style="color:var(--primary);"></i> More Innovations in progress – see Innovation Roadmap section for full details</li>
     </ul>
    </div>
   </div>
@@ -1136,188 +1149,38 @@ body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:var(--bg
 </div>
 
 <div class="section" id="innovation">
- <h2 class="section-title"><i class="fas fa-lightbulb"></i> Innovation & CIPs</h2>
- <p class="section-subtitle">Codification &amp; Agentic Use Cases, CIPs, Outcomes, and Governance – Portakabin Hybrid Cloud Operations – May 2026</p>
+ <h2 class="section-title"><i class="fas fa-road"></i> Innovation Roadmap</h2>
+ <p class="section-subtitle">FY26 Innovation Roadmap &mdash; <span class="acct-name">Portakabin</span> <span class="ops-name">Hybrid Cloud Operations</span> &middot; source: SDR deck slide 13</p>
 
- <!-- KPI Strip -->
- <div class="kpi-grid">
-  <div class="kpi-card blue"><div class="kpi-icon"><i class="fas fa-robot"></i></div><div class="kpi-label">Total CIP Activities</div><div class="kpi-value">2</div></div>
-  <div class="kpi-card amber"><div class="kpi-icon"><i class="fas fa-check-double"></i></div><div class="kpi-label">Tasks Identified</div><div class="kpi-value">13</div></div>
-  <div class="kpi-card green"><div class="kpi-icon"><i class="fas fa-cog"></i></div><div class="kpi-label">Tasks Codified</div><div class="kpi-value">8</div></div>
-  <div class="kpi-card blue"><div class="kpi-icon"><i class="fas fa-calendar-alt"></i></div><div class="kpi-label">Active Initiatives</div><div class="kpi-value">2</div></div>
-  <div class="kpi-card amber"><div class="kpi-icon"><i class="fas fa-hourglass-half"></i></div><div class="kpi-label">Completed Innovations</div><div class="kpi-value">6</div></div>
-  <div class="kpi-card green"><div class="kpi-icon"><i class="fas fa-star"></i></div><div class="kpi-label">Intelligent Ops Score</div><div class="kpi-value">17 / L3</div></div>
- </div>
-
- <!-- Intelligent Ops Maturity Context -->
- <div class="highlight-box" style="border-left:4px solid var(--primary);margin-bottom:18px;">
-  <h4><i class="fas fa-chart-line" style="color:var(--primary);"></i> Intelligent Operations Maturity Context</h4>
-  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin-top:10px;">
-   <div style="background:#f7f0ff;border-radius:8px;padding:10px;text-align:center;"><div style="font-size:11px;color:var(--text-light);text-transform:uppercase;">Overall Score</div><div style="font-size:22px;font-weight:700;color:var(--primary);">17</div><div style="font-size:11px;color:var(--text-light);">Level 3 (Partial)</div></div>
-   <div style="background:#d4edda;border-radius:8px;padding:10px;text-align:center;"><div style="font-size:11px;color:var(--text-light);text-transform:uppercase;">KPI RAG</div><div style="font-size:16px;font-weight:700;color:#155724;">● Green</div><div style="font-size:11px;color:var(--text-light);">Base KPI: 1 | Ops KPI: 1</div></div>
-   <div style="background:#fff3cd;border-radius:8px;padding:10px;text-align:center;"><div style="font-size:11px;color:var(--text-light);text-transform:uppercase;">ToolChain RAG</div><div style="font-size:16px;font-weight:700;color:#856404;">● Amber</div><div style="font-size:11px;color:var(--text-light);">Codification: 2 | Observability: 2</div></div>
-   <div style="background:#f8d7da;border-radius:8px;padding:10px;text-align:center;"><div style="font-size:11px;color:var(--text-light);text-transform:uppercase;">Process RAG</div><div style="font-size:16px;font-weight:700;color:#721c24;">● Red</div><div style="font-size:11px;color:var(--text-light);">FinOps: 0 | DevOps: 0 | SecOps: 0</div></div>
-   <div style="background:#f7f0ff;border-radius:8px;padding:10px;text-align:center;"><div style="font-size:11px;color:var(--text-light);text-transform:uppercase;">AIOPS / Agentic</div><div style="font-size:22px;font-weight:700;color:var(--primary);">0</div><div style="font-size:11px;color:var(--text-light);">Target: 2 (Compliant)</div></div>
-   <div style="background:#f7f0ff;border-radius:8px;padding:10px;text-align:center;"><div style="font-size:11px;color:var(--text-light);text-transform:uppercase;">Labor Pyramid</div><div style="font-size:22px;font-weight:700;color:var(--primary);">2</div><div style="font-size:11px;color:var(--text-light);">Compliant</div></div>
-  </div>
-  <p style="font-size:12px;color:var(--text-light);margin-top:10px;"><i class="fas fa-info-circle"></i> Scoring: 0 = Non-Compliant &nbsp;|&nbsp; 1 = Partial &nbsp;|&nbsp; 2 = Compliant &nbsp;|&nbsp; Target overall score ≥ 20 to reach Level 4</p>
- </div>
-
- <!-- CIP Activity Detail Table -->
- <h4 style="color:var(--primary);margin-bottom:10px;"><i class="fas fa-table"></i> CIP Activity Register</h4>
+ <!-- Quarter timeline (driven solely by slide 13) -->
  <div class="table-container"><table>
-  <thead><tr><th>Activity Name</th><th># Tasks</th><th># Codified</th><th>Trigger</th><th>Codify Type</th><th>Platform</th><th>Domain</th><th>Status</th><th>Start</th><th>End</th><th>Green $ (KPI Benefit)</th><th>Green $ (FTE)</th></tr></thead>
-  <tbody>
-   <tr>
-    <td><b>Enterprise AI Integration via MCP with Boomi &amp; SAP</b><br><small style="color:var(--text-light);">Agentic (MCP) + Boomi integration</small></td>
-    <td>8</td><td>3</td><td>Event-driven</td><td>Agentic</td><td>Agentic (MCP) + Boomi</td><td>Enterprise / Application Integration</td>
-    <td><span class="badge badge-blue">Initiative</span></td><td>01-Apr-2026</td><td>30-Sep-2026</td>
-    <td>~40% reduction in integration build/lead time; faster cross-system data flow</td><td>TBD</td>
-   </tr>
-   <tr>
-    <td><b>Automated SSL/TLS Certificate Expiry Notifications (ADCS)</b><br><small style="color:var(--text-light);">Ansible + ServiceNow automation</small></td>
-    <td>5</td><td>5</td><td>Scheduled</td><td>Rule-based / DevOps</td><td>Ansible + ServiceNow</td><td>Infrastructure / Security (PKI)</td>
-    <td><span class="badge badge-blue">Initiative</span></td><td>01-Feb-2026</td><td>15-May-2026</td>
-    <td>~100% prevention of certificate-expiry outages; improved service availability KPI</td><td>TBD</td>
-   </tr>
-  </tbody>
+  <thead><tr>
+   <th style="width:25%;">Q1 2026 &middot; Jan&ndash;Mar</th>
+   <th style="width:25%;">Q2 2026 &middot; Apr&ndash;Jun</th>
+   <th style="width:25%;">Q3 2026 &middot; Jul&ndash;Sep</th>
+   <th style="width:25%;">Q4 2026 &middot; Oct&ndash;Dec</th>
+  </tr></thead>
+  <tbody><tr>
+   <td style="vertical-align:top;color:var(--text-light);">No items scheduled</td>
+   <td style="vertical-align:top;color:var(--text-light);">No items scheduled</td>
+   <td style="vertical-align:top;">
+    <b>Self-Healing for Disk Utilization</b><br>
+    <span style="font-size:11px;color:var(--text-light);">Proactive auto-remediation before service impact, reducing critical P1/P2 disk alerts.</span>
+    <hr style="border:none;border-top:1px solid var(--border);margin:9px 0;">
+    <b>Agentic AI Database Agent</b><br>
+    <span style="font-size:11px;color:var(--text-light);">Monitors a fleet of Azure SQL databases &mdash; detects issues, diagnoses root causes, plans and executes remediations, and produces executive health reports entirely through natural-language conversation in Microsoft Teams.</span>
+   </td>
+   <td style="vertical-align:top;">
+    <b>Enterprise AI Integration via MCP (Boomi &amp; SAP)</b><br>
+    <span style="font-size:11px;color:var(--text-light);">~40% reduction in integration build/lead time; faster cross-system data flow. Connects AI capabilities (via Model Context Protocol) with core business platforms (Boomi, SAP) for seamless, intelligent enterprise integration. <i>8 tasks identified, 3 codified; window Apr&ndash;Sep 2026.</i></span>
+    <hr style="border:none;border-top:1px solid var(--border);margin:9px 0;">
+    <b>Automated SSL/TLS Certificate Expiry Notifications (ADCS)</b><br>
+    <span style="font-size:11px;color:var(--text-light);">Targets ~100% prevention of certificate-expiry outages; improved service availability KPI. Proactively alerts teams before ADCS certificates lapse, preventing outages caused by expired SSL/TLS certificates. <i>5 of 5 tasks codified; delivered Feb&ndash;May 2026.</i></span>
+   </td>
+  </tr></tbody>
  </table></div>
 
- <!-- CIP Deep-Dive Cards -->
- <h4 style="color:var(--primary);margin:18px 0 10px;"><i class="fas fa-project-diagram"></i> CIP Deep-Dive</h4>
- <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px;margin-bottom:22px;">
-
-  <!-- CIP 1 -->
-  <div class="highlight-box" style="border-left:4px solid var(--primary);">
-   <h4 style="color:var(--primary);"><i class="fas fa-robot"></i> Enterprise AI Integration via MCP with Boomi &amp; SAP</h4>
-   <p style="font-size:12px;color:var(--text-light);margin-bottom:8px;">Agentic (MCP) + Boomi | Enterprise / Application Integration | Apr 2026 – Sep 2026</p>
-   <ul>
-    <li><i class="fas fa-bullseye" style="color:var(--primary);"></i> <b>Objective:</b> Connect AI capabilities via Model Context Protocol (MCP) with core business platforms (Boomi, SAP) to enable intelligent enterprise integration</li>
-    <li><i class="fas fa-cog" style="color:var(--primary);"></i> <b>Approach:</b> Event-driven agentic automation; 8 tasks identified, 3 already codified</li>
-    <li><i class="fas fa-chart-line" style="color:var(--accent-green);"></i> <b>Expected Benefit:</b> ~40% reduction in integration build/lead time; faster cross-system data flow</li>
-    <li><i class="fas fa-database" style="color:var(--accent-blue);"></i> <b>Scope:</b> Part of the AI innovation roadmap – seamless, intelligent enterprise integration across Boomi and SAP</li>
-    <li><i class="fas fa-flag" style="color:var(--primary);"></i> <b>Status:</b> Active initiative | Tasks: 8 identified, 3 codified | Timeline: Apr 2026 → Sep 2026</li>
-   </ul>
-  </div>
-
-  <!-- CIP 2 -->
-  <div class="highlight-box" style="border-left:4px solid var(--accent-blue);">
-   <h4 style="color:var(--accent-blue);"><i class="fas fa-certificate"></i> Automated SSL/TLS Certificate Expiry Notifications (ADCS)</h4>
-   <p style="font-size:12px;color:var(--text-light);margin-bottom:8px;">Ansible + ServiceNow | Infrastructure / Security (PKI) | Feb 2026 – May 2026</p>
-   <ul>
-    <li><i class="fas fa-bullseye" style="color:var(--primary);"></i> <b>Objective:</b> Proactively alert teams before ADCS certificates lapse, preventing service outages caused by expired SSL/TLS certificates</li>
-    <li><i class="fas fa-cog" style="color:var(--primary);"></i> <b>Approach:</b> Scheduled rule-based + DevOps automation via Ansible and ServiceNow; all 5 tasks fully codified</li>
-    <li><i class="fas fa-chart-line" style="color:var(--accent-green);"></i> <b>Expected Benefit:</b> ~100% prevention of certificate-expiry outages; improved service availability KPI</li>
-    <li><i class="fas fa-database" style="color:var(--accent-blue);"></i> <b>Scope:</b> Full PKI lifecycle coverage for ADCS-managed certificates across the estate</li>
-    <li><i class="fas fa-flag" style="color:var(--accent-blue);"></i> <b>Status:</b> Active initiative | Tasks: 5 identified, 5 codified (100%) | Timeline: Feb 2026 → May 2026</li>
-   </ul>
-  </div>
- </div>
-
- <!-- Completed Innovations – May 2026 -->
- <h4 style="color:var(--primary);margin:18px 0 10px;"><i class="fas fa-check-double"></i> Completed Innovations & Operational Improvements – May 2026</h4>
- <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;margin-bottom:22px;">
-
-  <div class="highlight-box" style="border-left:4px solid var(--accent-green);">
-   <h4 style="color:var(--accent-green);"><i class="fas fa-server"></i> Server In-Place Upgrades</h4>
-   <p style="font-size:12px;color:var(--text-light);margin-bottom:8px;">OS Lifecycle Remediation | Windows Server Management</p>
-   <ul>
-    <li><i class="fas fa-check-circle" style="color:var(--accent-green);"></i> <b>SAP-PKD:</b> In-Place Upgrade from Windows Server 2008 → 2012 completed</li>
-    <li><i class="fas fa-check-circle" style="color:var(--accent-green);"></i> <b>SAP-PKQ:</b> In-Place Upgrade from Windows Server 2008 → 2012 completed</li>
-    <li><i class="fas fa-chart-line" style="color:var(--accent-green);"></i> <b>Benefit:</b> Reduced EOL exposure; improved security posture and vendor supportability</li>
-    <li><i class="fas fa-flag" style="color:var(--accent-green);"></i> <b>Status:</b> Completed</li>
-   </ul>
-  </div>
-
-  <div class="highlight-box" style="border-left:4px solid var(--accent-green);">
-   <h4 style="color:var(--accent-green);"><i class="fas fa-trash-alt"></i> Server Decommissioning</h4>
-   <p style="font-size:12px;color:var(--text-light);margin-bottom:8px;">Infrastructure Cleanup | Lifecycle Management</p>
-   <ul>
-    <li><i class="fas fa-check-circle" style="color:var(--accent-green);"></i> <b>ptkcelnprd01:</b> Decommissioned successfully</li>
-    <li><i class="fas fa-check-circle" style="color:var(--accent-green);"></i> <b>ptkcelnprdmgt01:</b> Decommissioned successfully</li>
-    <li><i class="fas fa-chart-line" style="color:var(--accent-green);"></i> <b>Benefit:</b> Reduced attack surface; freed capacity; improved estate hygiene</li>
-    <li><i class="fas fa-flag" style="color:var(--accent-green);"></i> <b>Status:</b> Completed</li>
-   </ul>
-  </div>
-
-  <div class="highlight-box" style="border-left:4px solid var(--accent-green);">
-   <h4 style="color:var(--accent-green);"><i class="fas fa-shield-alt"></i> Security Remediation & Hardening</h4>
-   <p style="font-size:12px;color:var(--text-light);margin-bottom:8px;">Security Posture | Endpoint Management</p>
-   <ul>
-    <li><i class="fas fa-check-circle" style="color:var(--accent-green);"></i> <b>GPO De-link:</b> Obsolete GPOs (GCPORT/GETRONICSCORE) distributing legacy RSA certificates removed from OUs</li>
-    <li><i class="fas fa-check-circle" style="color:var(--accent-green);"></i> <b>Wireshark Removal:</b> Removed from PTKDHCP003, PTKBIDEVSQL01, SAP-PKQ</li>
-    <li><i class="fas fa-check-circle" style="color:var(--accent-green);"></i> <b>Speculative Execution Patches:</b> Microsoft-recommended mitigations applied across estate</li>
-    <li><i class="fas fa-chart-line" style="color:var(--accent-green);"></i> <b>Benefit:</b> Eliminated legacy certificate risk; removed unauthorised network tools</li>
-    <li><i class="fas fa-flag" style="color:var(--accent-green);"></i> <b>Status:</b> Completed</li>
-   </ul>
-  </div>
-
-  <div class="highlight-box" style="border-left:4px solid var(--accent-green);">
-   <h4 style="color:var(--accent-green);"><i class="fas fa-box-open"></i> Asset Discovery – SnowInventory Agent Deployment</h4>
-   <p style="font-size:12px;color:var(--text-light);margin-bottom:8px;">Asset Management | 2012 Server Estate</p>
-   <ul>
-    <li><i class="fas fa-check-circle" style="color:var(--accent-green);"></i> <b>Agent:</b> SnowInventory_Agent_V7.5.0 deployed across all 2012 servers</li>
-    <li><i class="fas fa-chart-line" style="color:var(--accent-green);"></i> <b>Benefit:</b> Improved software licence visibility; accurate asset inventory for 2012 estate</li>
-    <li><i class="fas fa-flag" style="color:var(--accent-green);"></i> <b>Status:</b> Completed</li>
-   </ul>
-  </div>
-
-  <div class="highlight-box" style="border-left:4px solid var(--accent-green);">
-   <h4 style="color:var(--accent-green);"><i class="fas fa-folder-open"></i> DFS Target – German Share</h4>
-   <p style="font-size:12px;color:var(--text-light);margin-bottom:8px;">Storage &amp; File Services | High Availability</p>
-   <ul>
-    <li><i class="fas fa-check-circle" style="color:var(--accent-green);"></i> <b>Action:</b> DFS Target enabled for German Share from Cody File Server; configured as Secondary Target</li>
-    <li><i class="fas fa-chart-line" style="color:var(--accent-green);"></i> <b>Benefit:</b> Improved file share resilience and availability for German user base</li>
-    <li><i class="fas fa-flag" style="color:var(--accent-green);"></i> <b>Status:</b> Completed</li>
-   </ul>
-  </div>
-
-  <div class="highlight-box" style="border-left:4px solid var(--accent-green);">
-   <h4 style="color:var(--accent-green);"><i class="fas fa-sync-alt"></i> Monthly Patching – 100% Compliance</h4>
-   <p style="font-size:12px;color:var(--text-light);margin-bottom:8px;">Patch Management | Compliance</p>
-   <ul>
-    <li><i class="fas fa-check-circle" style="color:var(--accent-green);"></i> Monthly patching cycle completed with 100% compliance rate</li>
-    <li><i class="fas fa-chart-line" style="color:var(--accent-green);"></i> <b>Benefit:</b> Full patch compliance achieved; vulnerability window minimised across estate</li>
-    <li><i class="fas fa-flag" style="color:var(--accent-green);"></i> <b>Status:</b> Completed</li>
-   </ul>
-  </div>
-
- </div>
-
- <!-- YTD Impact & Governance -->
- <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;margin-bottom:22px;">
-  <div class="highlight-box" style="border-left:4px solid var(--accent-green);">
-   <h4><i class="fas fa-trophy" style="color:var(--accent-green);"></i> YTD Innovation Impact</h4>
-   <ul>
-    <li><i class="fas fa-check-circle" style="color:var(--accent-green);"></i> <b>Server OS Upgrades:</b> SAP-PKD &amp; SAP-PKQ upgraded from 2008 → 2012; EOL risk reduced</li>
-    <li><i class="fas fa-check-circle" style="color:var(--accent-green);"></i> <b>Server Decommissions:</b> ptkcelnprd01 &amp; ptkcelnprdmgt01 removed from estate</li>
-    <li><i class="fas fa-check-circle" style="color:var(--accent-green);"></i> <b>Security Hardening:</b> Legacy RSA GPOs de-linked; Wireshark removed; speculative execution patches applied</li>
-    <li><i class="fas fa-check-circle" style="color:var(--accent-green);"></i> <b>SnowInventory V7.5.0:</b> Deployed across all 2012 servers – asset visibility improved</li>
-    <li><i class="fas fa-check-circle" style="color:var(--accent-green);"></i> <b>DFS German Share:</b> Secondary Target configured; file share resilience improved</li>
-    <li><i class="fas fa-check-circle" style="color:var(--accent-green);"></i> <b>Patching Compliance:</b> 100% monthly patching compliance achieved</li>
-   </ul>
-  </div>
-  <div class="highlight-box" style="border-left:4px solid var(--primary);">
-   <h4><i class="fas fa-road" style="color:var(--primary);"></i> Innovation Roadmap (Next 60 Days)</h4>
-   <ul>
-    <li><i class="fas fa-arrow-right" style="color:var(--primary);"></i> Enforcement of LDAP Signing Requirement on Domain Controllers</li>
-    <li><i class="fas fa-arrow-right" style="color:var(--primary);"></i> Upgrade Microsoft Edge to latest version (148.0.3967.83) across estate</li>
-    <li><i class="fas fa-arrow-right" style="color:var(--primary);"></i> Self-Healing for Disk Utilization — automated remediation (raised 25 May, Infra)</li>
-    <li><i class="fas fa-arrow-right" style="color:var(--primary);"></i> Zero-Touch Patching — continue assessment to reduce manual patching effort/errors</li>
-    <li><i class="fas fa-arrow-right" style="color:var(--primary);"></i> Continue OS upgrade programme for remaining EOL servers</li>
-    <li><i class="fas fa-arrow-right" style="color:var(--primary);"></i> Target AIOPS/Agentic maturity score from 0 → 1 (Partial compliance)</li>
-   </ul>
-  </div>
-  <div class="highlight-box" style="border-left:4px solid var(--accent-amber);">
-   <h4><i class="fas fa-exclamation-triangle" style="color:var(--accent-amber);"></i> Innovation Blockers &amp; Dependencies</h4>
-   <ul>
-    <li><i class="fas fa-lock" style="color:var(--accent-red);"></i> Remaining EOL servers require client-coordinated change windows for OS upgrades</li>
-    <li><i class="fas fa-exclamation-circle" style="color:var(--accent-amber);"></i> Zero-Touch Patching still in assessment — pending evaluation before pilot</li>
-    <li><i class="fas fa-exclamation-circle" style="color:var(--accent-amber);"></i> Self-Healing for Disk Utilization newly raised (25 May) — design/owner to be confirmed</li>
-    <li><i class="fas fa-info-circle" style="color:var(--primary);"></i> FinOps, DevOps, SecOps maturity currently at 0 – investment needed to progress to Level 4</li>
-   </ul>
-  </div>
- </div>
+ <p class="section-subtitle" style="margin-top:6px;"><i class="fas fa-info-circle"></i> Quarter placement follows slide 13 (FY26 Innovation Roadmap). Q3 benefits are from slide 13; Q4 benefit detail (MCP, ADCS) is sourced from the Innovation &amp; CIPs table on slide 12, where the roadmap left them blank. Q1&ndash;Q2 carry no roadmap items on the slide.</p>
 </div>
 
 <!-- ========== TICKET INTELLIGENCE (Incidents / Tasks / Changes) ========== -->
@@ -1785,24 +1648,58 @@ body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:var(--bg
 <!-- ========== PROJECTS ========== -->
 <div class="section" id="projects">
  <h2 class="section-title"><i class="fas fa-project-diagram"></i> Projects</h2>
- <p class="section-subtitle">Projects Inventory – Portakabin</p>
+ <p class="section-subtitle">Projects Inventory, Executed &amp; Charged &mdash; <span class="acct-name">Portakabin</span> &middot; costs in GBP &middot; source: SDR deck slide 14</p>
+
+ <!-- KPI strip -->
+ <div class="kpi-grid">
+  <div class="kpi-card blue"><div class="kpi-icon"><i class="fas fa-folder-open"></i></div><div class="kpi-label">Total Projects</div><div class="kpi-value">14</div></div>
+  <div class="kpi-card green"><div class="kpi-icon"><i class="fas fa-check-circle"></i></div><div class="kpi-label">Completed</div><div class="kpi-value">4</div></div>
+  <div class="kpi-card amber"><div class="kpi-icon"><i class="fas fa-spinner"></i></div><div class="kpi-label">In Progress</div><div class="kpi-value">2</div></div>
+  <div class="kpi-card"><div class="kpi-icon"><i class="fas fa-inbox"></i></div><div class="kpi-label">Pipeline / Proposed</div><div class="kpi-value">8</div></div>
+  <div class="kpi-card blue"><div class="kpi-icon"><i class="fas fa-pound-sign"></i></div><div class="kpi-label">One-Time Cost</div><div class="kpi-value">&pound;160.3k</div></div>
+  <div class="kpi-card green"><div class="kpi-icon"><i class="fas fa-sync-alt"></i></div><div class="kpi-label">Recurring Cost</div><div class="kpi-value">&pound;1.9k</div></div>
+ </div>
+
+ <!-- Cost graphs -->
+ <div class="chart-grid">
+  <div class="chart-box"><h4><i class="fas fa-pound-sign" style="color:var(--primary);"></i> One-Time Project Cost by Project (GBP)</h4><canvas id="proj-onetime"></canvas></div>
+  <div class="chart-box"><h4><i class="fas fa-sync-alt" style="color:var(--accent-green);"></i> Recurring Project Cost by Project (GBP)</h4><canvas id="proj-recurring"></canvas></div>
+ </div>
+ <div class="chart-grid">
+  <div class="chart-box"><h4><i class="fas fa-tasks"></i> Project Status Distribution</h4><canvas id="proj-status"></canvas></div>
+  <div class="highlight-box">
+   <h4><i class="fas fa-lightbulb" style="color:var(--primary);"></i> Cost Insights</h4>
+   <ul>
+    <li><i class="fas fa-circle" style="color:var(--accent-red);"></i> <b>Darwin Migration (&pound;145k)</b> is ~90% of all one-time project spend &mdash; the dominant investment.</li>
+    <li><i class="fas fa-circle" style="color:var(--primary);"></i> Total committed: <b>&pound;160.3k one-time</b> + <b>&pound;1.9k recurring</b> across 6 charged projects.</li>
+    <li><i class="fas fa-circle" style="color:var(--accent-green);"></i> <b>4 projects completed</b> (Germany Migration, AIDA Web Proxy, ABAS RDP Servers, RDP Server for AIDA).</li>
+    <li><i class="fas fa-circle" style="color:var(--accent-amber);"></i> <b>8 in the pipeline</b> (proposals/prep) &mdash; mostly security &amp; lifecycle work pending sign-off; owners marked TBC.</li>
+   </ul>
+  </div>
+ </div>
+
+ <!-- Full inventory table -->
+ <h4 style="margin:6px 0 10px;color:var(--primary);"><i class="fas fa-table"></i> Project Inventory</h4>
  <div class="table-container"><table>
-  <thead><tr><th>Project Name</th><th>Status</th><th>Start Date</th><th>Target Date</th><th>Resource Name</th><th>Total Cost Allocated</th><th>Total Cost Consumed</th></tr></thead>
+  <thead><tr><th>Project Name</th><th>Status</th><th>Start</th><th>Target</th><th>Owner</th><th>One-Time (GBP)</th><th>Recurring (GBP)</th></tr></thead>
   <tbody>
-   <tr><td>Boomi Cloud Migration</td><td><span style="color:var(--accent-green);font-weight:600;">Completed</span></td><td>Jan 2025</td><td>Mar 2025</td><td>Anindya Ghosh</td><td>–</td><td>–</td></tr>
-   <tr><td>Azure AD Connect Upgrade (v2)</td><td><span style="color:var(--accent-green);font-weight:600;">Completed</span></td><td>Feb 2025</td><td>Apr 2025</td><td>Shruti S</td><td>–</td><td>–</td></tr>
-   <tr><td>Windows Server 2012 R2 Remediation (EOL)</td><td><span style="color:var(--accent-amber);font-weight:600;">In Progress</span></td><td>Mar 2025</td><td>Jun 2026</td><td>Keerthi P</td><td>–</td><td>–</td></tr>
-   <tr><td>Windows Server 2016 Upgrade Planning</td><td><span style="color:var(--accent-amber);font-weight:600;">In Progress</span></td><td>Apr 2025</td><td>Dec 2026</td><td>Anindya Ghosh</td><td>–</td><td>–</td></tr>
-   <tr><td>ADCS SSL/TLS Certificate Automation</td><td><span style="color:var(--accent-green);font-weight:600;">Completed</span></td><td>Feb 2026</td><td>May 2026</td><td>Rishik Sahu</td><td>–</td><td>–</td></tr>
-   <tr><td>MCP / Boomi / SAP AI Integration</td><td><span style="color:var(--accent-amber);font-weight:600;">In Progress</span></td><td>Apr 2026</td><td>Sep 2026</td><td>Anindya Ghosh</td><td>–</td><td>–</td></tr>
-   <tr><td>LDAP Signing &amp; Channel Binding Enforcement</td><td><span style="color:var(--accent-amber);font-weight:600;">In Progress</span></td><td>Mar 2026</td><td>Jul 2026</td><td>Shruti S</td><td>–</td><td>–</td></tr>
-   <tr><td>Microsoft Edge Standardisation (v131+)</td><td><span style="color:var(--accent-amber);font-weight:600;">In Progress</span></td><td>Apr 2026</td><td>Jun 2026</td><td>Keerthi P</td><td>–</td><td>–</td></tr>
-   <tr><td>SQL Server 2014 EOL Remediation</td><td><span style="color:var(--primary);font-weight:600;">Planned</span></td><td>Jun 2026</td><td>Dec 2026</td><td>Rishik Sahu</td><td>–</td><td>–</td></tr>
-   <tr><td>Backup Coverage Expansion (57 → Target)</td><td><span style="color:var(--accent-amber);font-weight:600;">In Progress</span></td><td>Jan 2026</td><td>Sep 2026</td><td>Anindya Ghosh</td><td>–</td><td>–</td></tr>
-   <tr><td>Capacity Management Reporting Enhancement</td><td><span style="color:var(--accent-green);font-weight:600;">Completed</span></td><td>Nov 2025</td><td>Feb 2026</td><td>Shruti S</td><td>–</td><td>–</td></tr>
-   <tr><td>Intelligent Operations Maturity Uplift (L3 → L4)</td><td><span style="color:var(--primary);font-weight:600;">Planned</span></td><td>Jul 2026</td><td>Dec 2026</td><td>Anindya Ghosh</td><td>–</td><td>–</td></tr>
+   <tr><td>Germany Migration</td><td><span class="badge badge-green">Completed</span></td><td>&mdash;</td><td>30-Apr-26</td><td>Anindya</td><td>&mdash;</td><td>&mdash;</td></tr>
+   <tr><td>AIDA Web Proxy</td><td><span class="badge badge-green">Completed</span></td><td>&mdash;</td><td>30-Apr-26</td><td>Anindya</td><td>&pound;1,963</td><td>&pound;412</td></tr>
+   <tr><td>ABAS RDP Servers</td><td><span class="badge badge-green">Completed</span></td><td>12-Jan-26</td><td>30-Apr-26</td><td>Anindya</td><td>&pound;2,740</td><td>&pound;1,089</td></tr>
+   <tr><td>RDP Server for AIDA</td><td><span class="badge badge-green">Completed</span></td><td>03-Feb-26</td><td>20-Mar-26</td><td>Anindya</td><td>&pound;1,158</td><td>&pound;412</td></tr>
+   <tr><td>Darwin Migration</td><td><span class="badge badge-blue">In Progress</span></td><td>01-Jul-26</td><td>31-Nov-26</td><td>Sridhar</td><td>&pound;145,000</td><td>&mdash;</td></tr>
+   <tr><td>Secure File Server Access Solution</td><td><span class="badge badge-blue">In Progress</span></td><td>15-Apr-26</td><td>14-Aug-26</td><td>Anindya / Sridhar</td><td>&pound;8,000</td><td>&mdash;</td></tr>
+   <tr><td>Sage50 Copy on Portakabin Azure</td><td><span class="badge badge-amber">Awaiting Signature</span></td><td>04-May-26</td><td>10-Jul-26</td><td>Anindya / Sridhar</td><td>&pound;1,434</td><td>&mdash;</td></tr>
+   <tr><td>OS Upgrade of UYGCPORTBKP001 &amp; UYGCPORTBKP003</td><td><span class="badge badge-gray">Proposal Provided</span></td><td>03-Aug-26</td><td>30-Sep-26</td><td>TBC</td><td>&mdash;</td><td>&mdash;</td></tr>
+   <tr><td>Authorized NTP Source</td><td><span class="badge badge-gray">Proposal Provided</span></td><td>21-Jul-26</td><td>28-Aug-26</td><td>TBC</td><td>&mdash;</td><td>&mdash;</td></tr>
+   <tr><td>IIS-DEV &amp; IIS-PRD</td><td><span class="badge badge-gray">Proposal Provided</span></td><td>10-Aug-26</td><td>16-Oct-26</td><td>TBC</td><td>&mdash;</td><td>&mdash;</td></tr>
+   <tr><td>Fine Grained Password Policy Effort Estimate</td><td><span class="badge badge-gray">Proposal Provided</span></td><td>14-Jul-26</td><td>07-Aug-26</td><td>TBC</td><td>&mdash;</td><td>&mdash;</td></tr>
+   <tr><td>Strong Certificate Binding</td><td><span class="badge badge-gray">Proposal Provided</span></td><td>17-Aug-26</td><td>25-Sep-26</td><td>TBC</td><td>&mdash;</td><td>&mdash;</td></tr>
+   <tr><td>AIDA Application Upgrade</td><td><span class="badge badge-gray">Proposal Prep</span></td><td>TBC</td><td>TBC</td><td>TBC</td><td>&mdash;</td><td>&mdash;</td></tr>
+   <tr><td>PAM Solution Design</td><td><span class="badge badge-red">Awaiting Dependencies</span></td><td>On hold</td><td>TBC</td><td>TBC</td><td>&mdash;</td><td>&mdash;</td></tr>
   </tbody>
  </table></div>
+ <p class="section-subtitle" style="margin-top:6px;"><i class="fas fa-info-circle"></i> Totals: <b>&pound;160,295 one-time</b> and <b>&pound;1,913 recurring</b> across the 6 charged projects. Cost values as recorded on slide 14 (blank = not costed / pipeline).</p>
 </div>
 
 <!-- ========== ACCOUNT DEMOGRAPHICS ========== -->
@@ -5298,9 +5195,41 @@ function wireItsmChartResize(){
           buildTicketCharts(act ? act.id : 'ti-incidents');
         },40);
       }
+      if(id==='projects'){
+        setTimeout(()=>{ if(!window.__projBuilt){ initProjectCharts(); window.__projBuilt=true; } },40);
+      }
     };
   }
   window.__itsmResizeWrapped=true;
+}
+
+/* Projects — cost & status charts (lazy-built on first view; the section is
+   hidden on load so charts must size after it becomes visible). Source: slide 14. */
+function initProjectCharts(){
+  if(document.getElementById('proj-onetime')){
+    charts.projOneTime=new Chart(document.getElementById('proj-onetime'),{
+     type:'bar',
+     data:{labels:['Darwin Migration','Secure File Server Access','ABAS RDP Servers','AIDA Web Proxy','Sage50 Copy (Azure)','RDP Server for AIDA'],
+      datasets:[{label:'One-Time Cost (GBP)',data:[145000,8000,2740,1963,1434,1158],backgroundColor:['#D52B1E','#007272','#00A39A','#0099CC','#C96A00','#0B2D5B'],borderRadius:6}]},
+     options:{responsive:true,indexAxis:'y',plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>'£'+c.parsed.x.toLocaleString()}}},scales:{x:{beginAtZero:true,title:{display:true,text:'GBP (£)'}}}}
+    });
+  }
+  if(document.getElementById('proj-recurring')){
+    charts.projRecurring=new Chart(document.getElementById('proj-recurring'),{
+     type:'bar',
+     data:{labels:['ABAS RDP Servers','AIDA Web Proxy','RDP Server for AIDA'],
+      datasets:[{label:'Recurring Cost (GBP)',data:[1089,412,412],backgroundColor:['#007A47','#00A39A','#0099CC'],borderRadius:6}]},
+     options:{responsive:true,indexAxis:'y',plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>'£'+c.parsed.x.toLocaleString()}}},scales:{x:{beginAtZero:true,title:{display:true,text:'GBP (£) per period'}}}}
+    });
+  }
+  if(document.getElementById('proj-status')){
+    charts.projStatus=new Chart(document.getElementById('proj-status'),{
+     type:'doughnut',
+     data:{labels:['Completed','In Progress','Awaiting Signature','Proposal Provided','Proposal Prep','Awaiting Dependencies'],
+      datasets:[{data:[4,2,1,5,1,1],backgroundColor:['#007A47','#0099CC','#C96A00','#94a3b8','#cbd5e1','#D52B1E'],borderWidth:0}]},
+     options:{responsive:true,plugins:{legend:{position:'bottom'}}}
+    });
+  }
 }
 document.addEventListener('DOMContentLoaded', wireItsmChartResize);
 </script>
