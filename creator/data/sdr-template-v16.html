@@ -876,16 +876,29 @@ body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:var(--bg
  </div>
 
  <!-- ===== Financial Snapshot ===== -->
- <h4 style="margin:16px 0 8px;color:var(--primary);"><i class="fas fa-dollar-sign"></i> Financial Snapshot</h4>
+ <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin:16px 0 8px;">
+  <h4 style="color:var(--primary);margin:0;"><i class="fas fa-dollar-sign"></i> Financial Snapshot</h4>
+  <div class="filter-bar" style="margin:0;">
+   <label style="font-size:11px;color:var(--text-light);">Domain:
+    <select id="ls-fin-domain" onchange="lsRenderFin()">
+     <option value="all">All domains (4)</option>
+     <option value="Hybrid Cloud">Hybrid Cloud</option>
+     <option value="Database">Database</option>
+     <option value="Backup">Backup</option>
+     <option value="Capacity">Capacity</option>
+    </select>
+   </label>
+  </div>
+ </div>
  <div class="kpi-grid">
   <div class="kpi-card blue"><div class="kpi-icon"><i class="fas fa-hand-holding-usd"></i></div><div class="kpi-label">Total Contract Value</div><div class="kpi-value">$15.1M</div></div>
-  <div class="kpi-card"><div class="kpi-icon"><i class="fas fa-users-cog"></i></div><div class="kpi-label"># FACT FTE</div><div class="kpi-value">1.64</div></div>
-  <div class="kpi-card"><div class="kpi-icon"><i class="fas fa-file-invoice-dollar"></i></div><div class="kpi-label">FACT Cost (Monthly)</div><div class="kpi-value">$3.47K</div></div>
-  <div class="kpi-card amber"><div class="kpi-icon"><i class="fas fa-user-tie"></i></div><div class="kpi-label">May Actual FTE</div><div class="kpi-value">2.30</div></div>
-  <div class="kpi-card green"><div class="kpi-icon"><i class="fas fa-money-bill-wave"></i></div><div class="kpi-label">May Deployed Cost</div><div class="kpi-value">$8.30K</div></div>
+  <div class="kpi-card"><div class="kpi-icon"><i class="fas fa-users-cog"></i></div><div class="kpi-label" id="ls-fin-factfte-lbl"># FACT FTE (all domains)</div><div class="kpi-value" id="ls-fin-factfte">1.97</div></div>
+  <div class="kpi-card"><div class="kpi-icon"><i class="fas fa-file-invoice-dollar"></i></div><div class="kpi-label">FACT Cost (Monthly)</div><div class="kpi-value" id="ls-fin-factcost">$5.26K</div></div>
+  <div class="kpi-card amber"><div class="kpi-icon"><i class="fas fa-user-tie"></i></div><div class="kpi-label">May Actual FTE</div><div class="kpi-value" id="ls-fin-mayactfte">2.76</div></div>
+  <div class="kpi-card green"><div class="kpi-icon"><i class="fas fa-money-bill-wave"></i></div><div class="kpi-label">May Deployed Cost</div><div class="kpi-value" id="ls-fin-maydeployed">$9.21K</div></div>
  </div>
  <div class="highlight-box" style="margin-bottom:18px;">
-  <ul><li><i class="fas fa-info-circle" style="color:var(--primary);"></i> Deployed cost has scaled with demand from <b>$3.32K (Jan)</b> to <b>$8.30K (May)</b> as actual FTE rose from 1.74 to 2.30 &mdash; still delivering above the 1.64 FACT model baseline.</li></ul>
+  <ul><li><i class="fas fa-info-circle" style="color:var(--primary);"></i> <span id="ls-fin-note">Across all 4 billed domains (Hybrid Cloud, Database, Backup, Capacity), deployed cost scaled with demand from <b>$4.04K (Jan)</b> to <b>$9.21K (May)</b> as actual FTE rose from 2.12 to 2.76 &mdash; running above the 1.97 FACT model baseline.</span></li></ul>
  </div>
  <div class="chart-grid">
   <div class="chart-box"><h4><i class="fas fa-user-friends" style="color:var(--primary);"></i> FTE Trend (Actual vs FACT)</h4><canvas id="ls-fte-trend"></canvas></div>
@@ -894,6 +907,7 @@ body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:var(--bg
 
  <!-- ===== Innovation Roadmap ===== -->
  <h4 style="margin:16px 0 8px;color:var(--primary);"><i class="fas fa-road"></i> Innovation Roadmap (FY26)</h4>
+ <p style="font-size:11.5px;color:var(--text-light);margin:-2px 0 8px;">4 initiatives across FY26 &mdash; <b>3 In Progress</b>, <b>1 Evaluating</b> &middot; status &amp; benefits per slide 13 (FY26 Innovation Roadmap).</p>
  <div class="table-container" style="margin-bottom:18px;"><table>
   <thead><tr>
    <th style="width:25%;">Q1 2026 &middot; Jan&ndash;Mar</th>
@@ -904,35 +918,53 @@ body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:var(--bg
   <tbody><tr>
    <td style="vertical-align:top;color:var(--text-light);">No items scheduled</td>
    <td style="vertical-align:top;color:var(--text-light);">No items scheduled</td>
-   <td style="vertical-align:top;"><i class="fas fa-circle" style="color:var(--accent-blue);font-size:7px;vertical-align:middle;"></i> Self-Healing for Disk Utilization<br><i class="fas fa-circle" style="color:var(--accent-blue);font-size:7px;vertical-align:middle;"></i> Agentic AI Database Agent</td>
-   <td style="vertical-align:top;"><i class="fas fa-circle" style="color:var(--accent-amber);font-size:7px;vertical-align:middle;"></i> Enterprise AI Integration via MCP (Boomi &amp; SAP)<br><i class="fas fa-circle" style="color:var(--accent-green);font-size:7px;vertical-align:middle;"></i> ADCS Cert Expiry Notifications</td>
+   <td style="vertical-align:top;">
+    <b>Self-Healing for Disk Utilization</b> <span class="badge badge-amber">In Progress</span>
+    <div style="font-size:11px;color:var(--text-light);margin:2px 0 0;"><b>Benefit:</b> Proactive auto-remediation before service impact &mdash; reduces critical P1/P2 disk alerts.</div>
+    <hr style="border:none;border-top:1px solid var(--border);margin:8px 0;">
+    <b>Agentic AI Database Agent</b> <span class="badge badge-gray">Evaluating</span>
+    <div style="font-size:11px;color:var(--text-light);margin:2px 0 0;"><b>Benefit:</b> Monitors a fleet of Azure SQL databases &mdash; detects issues, diagnoses root causes, plans &amp; executes remediations, and produces executive health reports, entirely through natural-language conversation in Microsoft Teams.</div>
+   </td>
+   <td style="vertical-align:top;">
+    <b>Enterprise AI Integration via MCP (Boomi &amp; SAP)</b> <span class="badge badge-amber">In Progress</span>
+    <div style="font-size:11px;color:var(--text-light);margin:2px 0 0;"><b>Benefit:</b> An AI assistant via MCP queries SAP for open purchase orders and uses Boomi to gather related data from other systems, then analyses it and recommends actions &mdash; all through natural-language conversation, without navigating multiple applications.</div>
+    <hr style="border:none;border-top:1px solid var(--border);margin:8px 0;">
+    <b>Automated SSL/TLS Certificate Expiry Notifications (ADCS) &mdash; ManageEngine</b> <span class="badge badge-amber">In Progress</span>
+    <div style="font-size:11px;color:var(--text-light);margin:2px 0 0;"><b>Benefit:</b> Proactively alerts administrators before certificates expire &mdash; improves security compliance, reduces manual effort, streamlines certificate lifecycle management, and ensures uninterrupted availability of business-critical services.</div>
+   </td>
   </tr></tbody>
  </table></div>
 
  <!-- ===== Incident Snapshot ===== -->
- <h4 style="margin:16px 0 8px;color:var(--primary);"><i class="fas fa-exclamation-triangle"></i> Incident Snapshot</h4>
+ <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin:16px 0 8px;">
+  <h4 style="color:var(--primary);margin:0;"><i class="fas fa-exclamation-triangle"></i> Incident Snapshot</h4>
+  <div class="filter-bar" style="margin:0;">
+   <label style="font-size:11px;color:var(--text-light);">Assignment group:
+    <select id="ls-inc-group" onchange="lsRenderIncident()">
+     <option value="All">All groups</option>
+     <option value="Unisys HybridCloud - UIS - PKB">Unisys HybridCloud - UIS - PKB</option>
+     <option value="Backup-APAC-IND">Backup-APAC-IND</option>
+    </select>
+   </label>
+  </div>
+ </div>
  <div class="kpi-grid">
-  <div class="kpi-card blue"><div class="kpi-icon"><i class="fas fa-layer-group"></i></div><div class="kpi-label">Incidents (6-Month)</div><div class="kpi-value">788</div></div>
-  <div class="kpi-card"><div class="kpi-icon"><i class="fas fa-calendar-day"></i></div><div class="kpi-label">Raised in May</div><div class="kpi-value">160</div></div>
-  <div class="kpi-card green"><div class="kpi-icon"><i class="fas fa-stopwatch"></i></div><div class="kpi-label">MTTR (May)</div><div class="kpi-value">0.43d</div></div>
-  <div class="kpi-card green"><div class="kpi-icon"><i class="fas fa-check-double"></i></div><div class="kpi-label">Closed</div><div class="kpi-value">755</div></div>
-  <div class="kpi-card amber"><div class="kpi-icon"><i class="fas fa-hourglass-half"></i></div><div class="kpi-label">Open / Aging</div><div class="kpi-value">33</div></div>
-  <div class="kpi-card red"><div class="kpi-icon"><i class="fas fa-bolt"></i></div><div class="kpi-label">P2 / High</div><div class="kpi-value">36</div></div>
+  <div class="kpi-card blue"><div class="kpi-icon"><i class="fas fa-layer-group"></i></div><div class="kpi-label">Incidents (6-Month)</div><div class="kpi-value" id="ls-inc-total">788</div></div>
+  <div class="kpi-card"><div class="kpi-icon"><i class="fas fa-calendar-day"></i></div><div class="kpi-label">Raised in May</div><div class="kpi-value" id="ls-inc-may">160</div></div>
+  <div class="kpi-card green"><div class="kpi-icon"><i class="fas fa-stopwatch"></i></div><div class="kpi-label">MTTR (May)</div><div class="kpi-value" id="ls-inc-mttr">0.43d</div></div>
+  <div class="kpi-card green"><div class="kpi-icon"><i class="fas fa-check-double"></i></div><div class="kpi-label">Closed</div><div class="kpi-value" id="ls-inc-closed">755</div></div>
+  <div class="kpi-card amber"><div class="kpi-icon"><i class="fas fa-hourglass-half"></i></div><div class="kpi-label">Open / Aging</div><div class="kpi-value" id="ls-inc-open">33</div></div>
+  <div class="kpi-card red"><div class="kpi-icon"><i class="fas fa-bolt"></i></div><div class="kpi-label">P2 / High</div><div class="kpi-value" id="ls-inc-p2">36</div></div>
  </div>
  <div class="chart-grid">
   <div class="chart-box">
    <h4><i class="fas fa-stopwatch" style="color:var(--primary);"></i> MTTR Trend &mdash; 6-Month (days)</h4>
    <div class="filter-bar" style="margin-bottom:10px;">
     <label style="font-size:11px;color:var(--text-light);">Auto-resolved:
-     <select id="ls-mttr-auto" onchange="lsRenderMttr()">
+     <select id="ls-mttr-auto" onchange="lsRenderIncident()">
       <option value="all">All incidents</option>
       <option value="auto">Include auto-resolved only</option>
       <option value="noauto">Exclude auto-resolved</option>
-     </select>
-    </label>
-    <label style="font-size:11px;color:var(--text-light);">Assignment group:
-     <select id="ls-mttr-group" onchange="lsRenderMttr()">
-      <option value="-1">All groups</option>
      </select>
     </label>
    </div>
@@ -1039,19 +1071,19 @@ body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:var(--bg
  <!-- Finance Tab -->
  <div class="tab-content" id="esFinance">
   <div class="kpi-grid">
-   <div class="kpi-card blue"><div class="kpi-icon"><i class="fas fa-file-invoice-dollar"></i></div><div class="kpi-label">FACT FTE Cost (Monthly)</div><div class="kpi-value">$3.47K</div></div>
-   <div class="kpi-card"><div class="kpi-icon"><i class="fas fa-users-cog"></i></div><div class="kpi-label"># FACT FTE</div><div class="kpi-value">1.64</div></div>
-   <div class="kpi-card green"><div class="kpi-icon"><i class="fas fa-money-bill-wave"></i></div><div class="kpi-label">Current Month FTE Cost</div><div class="kpi-value">$8.30K</div></div>
-   <div class="kpi-card amber"><div class="kpi-icon"><i class="fas fa-user-tie"></i></div><div class="kpi-label">BAU FTE (May)</div><div class="kpi-value">2.3</div></div>
+   <div class="kpi-card blue"><div class="kpi-icon"><i class="fas fa-file-invoice-dollar"></i></div><div class="kpi-label">FACT FTE Cost (Monthly)</div><div class="kpi-value">$5.26K</div></div>
+   <div class="kpi-card"><div class="kpi-icon"><i class="fas fa-users-cog"></i></div><div class="kpi-label"># FACT FTE</div><div class="kpi-value">1.97</div></div>
+   <div class="kpi-card green"><div class="kpi-icon"><i class="fas fa-money-bill-wave"></i></div><div class="kpi-label">Current Month FTE Cost</div><div class="kpi-value">$9.21K</div></div>
+   <div class="kpi-card amber"><div class="kpi-icon"><i class="fas fa-user-tie"></i></div><div class="kpi-label">Actual FTE (May)</div><div class="kpi-value">2.76</div></div>
   </div>
   <div class="table-container"><table>
-   <thead><tr><th>Date</th><th>CDE</th><th>Account</th><th>Region</th><th>Domain</th><th>TCV $</th><th>FACT FTE</th><th>FACT Cost</th><th>Actual FTE</th><th>Deployed Cost</th></tr></thead>
+   <thead><tr><th>Date</th><th>CDE</th><th>Account</th><th>Region</th><th>Domains</th><th>TCV $</th><th>FACT FTE</th><th>FACT Cost</th><th>Actual FTE</th><th>Deployed Cost</th></tr></thead>
    <tbody>
-    <tr><td>Jan-26</td><td>Judit Cooke</td><td>Portakabin</td><td>EMEA</td><td>Hybrid Cloud</td><td>$15,100,000</td><td>1.64</td><td>$3,469.09</td><td>1.74</td><td>$3,316.93</td></tr>
-    <tr><td>Feb-26</td><td>Judit Cooke</td><td>Portakabin</td><td>EMEA</td><td>Hybrid Cloud</td><td>$15,100,000</td><td>1.64</td><td>$3,469.09</td><td>1.73</td><td>$4,705.48</td></tr>
-    <tr><td>Mar-26</td><td>Judit Cooke</td><td>Portakabin</td><td>EMEA</td><td>Hybrid Cloud</td><td>$15,100,000</td><td>1.64</td><td>$3,469.09</td><td>1.96</td><td>$5,658.00</td></tr>
-    <tr><td>Apr-26</td><td>Judit Cooke</td><td>Portakabin</td><td>EMEA</td><td>Hybrid Cloud</td><td>$15,100,000</td><td>1.64</td><td>$3,469.09</td><td>2.33</td><td>$8,383.70</td></tr>
-    <tr style="background:#E1F0EF;font-weight:600;"><td>May-26</td><td>Judit Cooke</td><td>Portakabin</td><td>EMEA</td><td>Hybrid Cloud</td><td>$15,100,000</td><td>1.64</td><td>$3,469.09</td><td>2.3</td><td>$8,299.33</td></tr>
+    <tr><td>Jan-26</td><td>Judit Cooke</td><td>Portakabin</td><td>EMEA</td><td>All (4)</td><td>$15,100,000</td><td>1.97</td><td>$5,258.89</td><td>2.12</td><td>$4,037.44</td></tr>
+    <tr><td>Feb-26</td><td>Judit Cooke</td><td>Portakabin</td><td>EMEA</td><td>All (4)</td><td>$15,100,000</td><td>1.97</td><td>$5,258.89</td><td>2.20</td><td>$5,646.50</td></tr>
+    <tr><td>Mar-26</td><td>Judit Cooke</td><td>Portakabin</td><td>EMEA</td><td>All (4)</td><td>$15,100,000</td><td>1.97</td><td>$5,258.89</td><td>2.27</td><td>$6,226.53</td></tr>
+    <tr><td>Apr-26</td><td>Judit Cooke</td><td>Portakabin</td><td>EMEA</td><td>All (4)</td><td>$15,100,000</td><td>1.97</td><td>$5,258.89</td><td>2.79</td><td>$9,316.70</td></tr>
+    <tr style="background:#E1F0EF;font-weight:600;"><td>May-26</td><td>Judit Cooke</td><td>Portakabin</td><td>EMEA</td><td>All (4)</td><td>$15,100,000</td><td>1.97</td><td>$5,258.89</td><td>2.76</td><td>$9,212.33</td></tr>
    </tbody>
   </table></div>
  </div>
@@ -1062,21 +1094,33 @@ body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:var(--bg
  <h2 class="section-title"><i class="fas fa-dollar-sign"></i> Financial Overview</h2>
  <p class="section-subtitle">Run-rate, consumption, and savings – Portakabin Account</p>
  <div class="kpi-grid">
-  <div class="kpi-card blue"><div class="kpi-icon"><i class="fas fa-file-invoice-dollar"></i></div><div class="kpi-label">FACT FTE Cost (Monthly)</div><div class="kpi-value">$3.47K</div></div>
-  <div class="kpi-card"><div class="kpi-icon"><i class="fas fa-users-cog"></i></div><div class="kpi-label"># FACT FTE</div><div class="kpi-value">1.64</div></div>
-  <div class="kpi-card green"><div class="kpi-icon"><i class="fas fa-money-bill-wave"></i></div><div class="kpi-label">Current Month FTE Cost</div><div class="kpi-value">$8.30K</div></div>
-  <div class="kpi-card amber"><div class="kpi-icon"><i class="fas fa-user-tie"></i></div><div class="kpi-label">BAU FTE (May)</div><div class="kpi-value">2.3</div></div>
-  <div class="kpi-card"><div class="kpi-icon"><i class="fas fa-project-diagram"></i></div><div class="kpi-label">Project FTE</div><div class="kpi-value">0</div></div>
-  <div class="kpi-card"><div class="kpi-icon"><i class="fas fa-user-plus"></i></div><div class="kpi-label">Staff Aug FTE</div><div class="kpi-value">0</div></div>
+  <div class="kpi-card blue"><div class="kpi-icon"><i class="fas fa-file-invoice-dollar"></i></div><div class="kpi-label">FACT FTE Cost (Monthly)</div><div class="kpi-value">$5.26K</div></div>
+  <div class="kpi-card"><div class="kpi-icon"><i class="fas fa-users-cog"></i></div><div class="kpi-label"># FACT FTE (all domains)</div><div class="kpi-value">1.97</div></div>
+  <div class="kpi-card green"><div class="kpi-icon"><i class="fas fa-money-bill-wave"></i></div><div class="kpi-label">Current Month FTE Cost</div><div class="kpi-value">$9.21K</div></div>
+  <div class="kpi-card amber"><div class="kpi-icon"><i class="fas fa-user-tie"></i></div><div class="kpi-label">Actual FTE (May)</div><div class="kpi-value">2.76</div></div>
+  <div class="kpi-card"><div class="kpi-icon"><i class="fas fa-sitemap"></i></div><div class="kpi-label">Domains Billed</div><div class="kpi-value">4</div></div>
+  <div class="kpi-card"><div class="kpi-icon"><i class="fas fa-hand-holding-usd"></i></div><div class="kpi-label">Total Contract Value</div><div class="kpi-value">$15.1M</div></div>
  </div>
+ <h4 style="margin:6px 0 10px;color:var(--primary);"><i class="fas fa-calendar-alt"></i> Monthly Run-Rate (all domains)</h4>
  <div class="table-container"><table>
-  <thead><tr><th>Date</th><th>Salesforce ID</th><th>Account</th><th>Region</th><th>Domain</th><th>Delivery Type</th><th>CE</th><th>CDE</th><th>TCV $</th><th>Go-Live</th><th>FACT FTE</th><th>FACT Cost</th><th>Actual FTE</th><th>Deployed Cost</th></tr></thead>
+  <thead><tr><th>Date</th><th>Account</th><th>Region</th><th>TCV $</th><th>FACT FTE</th><th>FACT Cost</th><th>Actual FTE</th><th>Deployed Cost</th></tr></thead>
   <tbody>
-   <tr><td>Jan-26</td><td>SFDC-297181</td><td>Portakabin</td><td>EMEA</td><td>Hybrid Cloud</td><td>Managed Services</td><td>Mithun Dsouza</td><td>Judit Cooke</td><td>$15,100,000</td><td>20/02/2025</td><td>1.64</td><td>$3,469.09</td><td>1.74</td><td>$3,316.93</td></tr>
-   <tr><td>Feb-26</td><td>SFDC-297181</td><td>Portakabin</td><td>EMEA</td><td>Hybrid Cloud</td><td>Managed Services</td><td>Mithun Dsouza</td><td>Judit Cooke</td><td>$15,100,000</td><td>20/02/2025</td><td>1.64</td><td>$3,469.09</td><td>1.73</td><td>$4,705.48</td></tr>
-   <tr><td>Mar-26</td><td>SFDC-297181</td><td>Portakabin</td><td>EMEA</td><td>Hybrid Cloud</td><td>Managed Services</td><td>Mithun Dsouza</td><td>Judit Cooke</td><td>$15,100,000</td><td>20/02/2025</td><td>1.64</td><td>$3,469.09</td><td>1.96</td><td>$5,658.00</td></tr>
-   <tr><td>Apr-26</td><td>SFDC-297181</td><td>Portakabin</td><td>EMEA</td><td>Hybrid Cloud</td><td>Managed Services</td><td>Mithun Dsouza</td><td>Judit Cooke</td><td>$15,100,000</td><td>20/02/2025</td><td>1.64</td><td>$3,469.09</td><td>2.33</td><td>$8,383.70</td></tr>
-   <tr style="background:#E1F0EF;font-weight:600;"><td>May-26</td><td>SFDC-297181</td><td>Portakabin</td><td>EMEA</td><td>Hybrid Cloud</td><td>Managed Services</td><td>Mithun Dsouza</td><td>Judit Cooke</td><td>$15,100,000</td><td>20/02/2025</td><td>1.64</td><td>$3,469.09</td><td>2.3</td><td>$8,299.33</td></tr>
+   <tr><td>Jan-26</td><td>Portakabin</td><td>EMEA</td><td>$15,100,000</td><td>1.97</td><td>$5,258.89</td><td>2.12</td><td>$4,037.44</td></tr>
+   <tr><td>Feb-26</td><td>Portakabin</td><td>EMEA</td><td>$15,100,000</td><td>1.97</td><td>$5,258.89</td><td>2.20</td><td>$5,646.50</td></tr>
+   <tr><td>Mar-26</td><td>Portakabin</td><td>EMEA</td><td>$15,100,000</td><td>1.97</td><td>$5,258.89</td><td>2.27</td><td>$6,226.53</td></tr>
+   <tr><td>Apr-26</td><td>Portakabin</td><td>EMEA</td><td>$15,100,000</td><td>1.97</td><td>$5,258.89</td><td>2.79</td><td>$9,316.70</td></tr>
+   <tr style="background:#E1F0EF;font-weight:600;"><td>May-26</td><td>Portakabin</td><td>EMEA</td><td>$15,100,000</td><td>1.97</td><td>$5,258.89</td><td>2.76</td><td>$9,212.33</td></tr>
+  </tbody>
+ </table></div>
+ <h4 style="margin:6px 0 10px;color:var(--primary);"><i class="fas fa-layer-group"></i> Domain Breakdown &mdash; May 2026</h4>
+ <div class="table-container"><table>
+  <thead><tr><th>Domain</th><th>FACT FTE</th><th>FACT Cost</th><th>Actual FTE</th><th>Deployed Cost</th><th>Var. vs FACT</th></tr></thead>
+  <tbody>
+   <tr><td>Hybrid Cloud</td><td>1.64</td><td>$3,469.09</td><td>2.30</td><td>$8,299.33</td><td><span class="badge badge-amber">+139%</span></td></tr>
+   <tr><td>Database</td><td>0.13</td><td>$1,324.28</td><td>0.21</td><td>$294.00</td><td><span class="badge badge-green">-78%</span></td></tr>
+   <tr><td>Backup</td><td>0.12</td><td>$220.72</td><td>0.23</td><td>$563.00</td><td><span class="badge badge-amber">+155%</span></td></tr>
+   <tr><td>Capacity</td><td>0.08</td><td>$244.80</td><td>0.02</td><td>$56.00</td><td><span class="badge badge-green">-77%</span></td></tr>
+   <tr style="background:#E1F0EF;font-weight:600;"><td>Total</td><td>1.97</td><td>$5,258.89</td><td>2.76</td><td>$9,212.33</td><td><span class="badge badge-amber">+75%</span></td></tr>
   </tbody>
  </table></div>
  <div class="chart-grid">
@@ -1164,23 +1208,23 @@ body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:var(--bg
    <td style="vertical-align:top;color:var(--text-light);">No items scheduled</td>
    <td style="vertical-align:top;color:var(--text-light);">No items scheduled</td>
    <td style="vertical-align:top;">
-    <b>Self-Healing for Disk Utilization</b><br>
-    <span style="font-size:11px;color:var(--text-light);">Proactive auto-remediation before service impact, reducing critical P1/P2 disk alerts.</span>
+    <b>Self-Healing for Disk Utilization</b> <span class="badge badge-amber">In Progress</span><br>
+    <span style="font-size:11px;color:var(--text-light);"><b>Benefit:</b> Proactive auto-remediation before service impact, reducing critical P1/P2 disk alerts.</span>
     <hr style="border:none;border-top:1px solid var(--border);margin:9px 0;">
-    <b>Agentic AI Database Agent</b><br>
-    <span style="font-size:11px;color:var(--text-light);">Monitors a fleet of Azure SQL databases &mdash; detects issues, diagnoses root causes, plans and executes remediations, and produces executive health reports entirely through natural-language conversation in Microsoft Teams.</span>
+    <b>Agentic AI Database Agent</b> <span class="badge badge-gray">Evaluating</span><br>
+    <span style="font-size:11px;color:var(--text-light);"><b>Benefit:</b> Monitors a fleet of Azure SQL databases &mdash; detects issues, diagnoses root causes, plans and executes remediations, and produces executive health reports entirely through natural-language conversation in Microsoft Teams.</span>
    </td>
    <td style="vertical-align:top;">
-    <b>Enterprise AI Integration via MCP (Boomi &amp; SAP)</b><br>
-    <span style="font-size:11px;color:var(--text-light);">~40% reduction in integration build/lead time; faster cross-system data flow. Connects AI capabilities (via Model Context Protocol) with core business platforms (Boomi, SAP) for seamless, intelligent enterprise integration. <i>8 tasks identified, 3 codified; window Apr&ndash;Sep 2026.</i></span>
+    <b>Enterprise AI Integration via MCP (Boomi &amp; SAP)</b> <span class="badge badge-amber">In Progress</span><br>
+    <span style="font-size:11px;color:var(--text-light);"><b>Benefit:</b> An AI assistant via MCP queries SAP for open purchase orders and uses Boomi to gather related data from other enterprise systems, then analyses it and provides actionable recommendations &mdash; all through natural-language conversation, without navigating multiple applications.</span>
     <hr style="border:none;border-top:1px solid var(--border);margin:9px 0;">
-    <b>Automated SSL/TLS Certificate Expiry Notifications (ADCS)</b><br>
-    <span style="font-size:11px;color:var(--text-light);">Targets ~100% prevention of certificate-expiry outages; improved service availability KPI. Proactively alerts teams before ADCS certificates lapse, preventing outages caused by expired SSL/TLS certificates. <i>5 of 5 tasks codified; delivered Feb&ndash;May 2026.</i></span>
+    <b>Automated SSL/TLS Certificate Expiry Notifications (ADCS) &mdash; ManageEngine</b> <span class="badge badge-amber">In Progress</span><br>
+    <span style="font-size:11px;color:var(--text-light);"><b>Benefit:</b> Proactively alerts administrators before certificates expire &mdash; improves security compliance, reduces manual effort, streamlines certificate lifecycle management, and ensures uninterrupted availability of business-critical applications and services.</span>
    </td>
   </tr></tbody>
  </table></div>
 
- <p class="section-subtitle" style="margin-top:6px;"><i class="fas fa-info-circle"></i> Quarter placement follows slide 13 (FY26 Innovation Roadmap). Q3 benefits are from slide 13; Q4 benefit detail (MCP, ADCS) is sourced from the Innovation &amp; CIPs table on slide 12, where the roadmap left them blank. Q1&ndash;Q2 carry no roadmap items on the slide.</p>
+ <p class="section-subtitle" style="margin-top:6px;"><i class="fas fa-info-circle"></i> Quarter placement, status and benefits are taken directly from slide 13 (FY26 Innovation Roadmap). Q1&ndash;Q2 carry no roadmap items on the slide.</p>
 </div>
 
 <!-- ========== TICKET INTELLIGENCE (Incidents / Tasks / Changes) ========== -->
@@ -3386,36 +3430,104 @@ function filterChanges() {
 }
 
 // ========== INIT STATIC CHARTS ==========
-/* Leadership Summary — MTTR cube: pre-aggregated [sumDays,count] per
-   month × assignment group × auto-resolved (auto = Close code "Solved Remotely
-   (Permanently)"). Lets the MTTR trend recompute client-side for the filters
-   without embedding all 788 raw rows. Derived from PKB_incident.xlsx. */
-const LSMTTR = {"months":["Jan-26","Feb-26","Mar-26","Apr-26","May-26","Jun-26"],"groups":["Unisys HybridCloud - UIS - PKB","Backup-APAC-IND","Other"],"buckets":[[[[169.2773,39],[40.33,75]],[[15.2372,5],[0.0,0]],[[0.0,0],[0.0,0]]],[[[56.0475,27],[14.7009,63]],[[8.2224,3],[0.0,0]],[[0.0,0],[0.0,0]]],[[[76.4617,17],[54.776,141]],[[2.2202,1],[0.0,0]],[[0.0,0],[0.0,0]]],[[[91.8654,22],[84.0595,161]],[[0.8725,1],[0.0,0]],[[0.0,0],[0.0,0]]],[[[18.4357,8],[40.479,147]],[[9.2856,4],[0.0,0]],[[0.0,0],[0.0,0]]],[[[11.0631,6],[23.086,62]],[[1.9564,1],[0.0,0]],[[0.0,0],[0.0,0]]]]};
-function lsComputeMttr(groupSel, autoMode){
- return LSMTTR.months.map((m,mi)=>{
+/* Leadership Summary — Financial cube: per-domain monthly FTE & cost (slide 3).
+   Drives the Domain filter so the Financial Snapshot KPIs, FTE Trend, FTE Cost
+   chart and the insight note all re-compute for the selected domain (or all). */
+const LSFIN = {
+  months:['Jan-26','Feb-26','Mar-26','Apr-26','May-26'],
+  data:{
+    'Hybrid Cloud':{factFte:[1.64,1.64,1.64,1.64,1.64], factCost:[3469.09,3469.09,3469.09,3469.09,3469.09], actFte:[1.74,1.73,1.96,2.33,2.30], deployed:[3316.93,4705.48,5658.00,8383.70,8299.33]},
+    'Database':    {factFte:[0.13,0.13,0.13,0.13,0.13], factCost:[1324.28,1324.28,1324.28,1324.28,1324.28], actFte:[0.18,0.20,0.18,0.20,0.21], deployed:[152.47,212.56,202.53,300.00,294.00]},
+    'Backup':      {factFte:[0.12,0.12,0.12,0.12,0.12], factCost:[220.72,220.72,220.72,220.72,220.72], actFte:[0.18,0.24,0.10,0.25,0.23], deployed:[509.00,642.00,279.00,619.00,563.00]},
+    'Capacity':    {factFte:[0.08,0.08,0.08,0.08,0.08], factCost:[244.80,244.80,244.80,244.80,244.80], actFte:[0.02,0.03,0.03,0.005,0.02], deployed:[59.04,86.46,87.00,14.00,56.00]}
+  }
+};
+function lsFmtK(v){ return '$'+(v/1000).toFixed(2)+'K'; }
+function lsComputeFin(domainSel){
+  const keys = (domainSel && domainSel!=='all') ? [domainSel] : Object.keys(LSFIN.data);
+  const z=[0,0,0,0,0];
+  const sum=(field)=>keys.reduce((acc,k)=>acc.map((v,i)=>+(v+LSFIN.data[k][field][i]).toFixed(4)),z.slice());
+  return {factFte:sum('factFte'), factCost:sum('factCost'), actFte:sum('actFte'), deployed:sum('deployed')};
+}
+function lsRenderFin(){
+  const sel=(document.getElementById('ls-fin-domain')||{}).value||'all';
+  const f=lsComputeFin(sel);
+  const label = sel==='all' ? 'all domains' : sel;
+  // KPIs
+  const set=(id,val)=>{const el=document.getElementById(id); if(el) el.textContent=val;};
+  set('ls-fin-factfte', f.factFte[0].toFixed(2));
+  set('ls-fin-factfte-lbl', sel==='all' ? '# FACT FTE (all domains)' : '# FACT FTE');
+  set('ls-fin-factcost', lsFmtK(f.factCost[0]));
+  set('ls-fin-mayactfte', f.actFte[4].toFixed(2));
+  set('ls-fin-maydeployed', lsFmtK(f.deployed[4]));
+  // Charts
+  if(charts.lsFteTrend){
+    charts.lsFteTrend.data.datasets[0].data=f.actFte;
+    charts.lsFteTrend.data.datasets[1].data=f.factFte;
+    charts.lsFteTrend.data.datasets[0].label='Actual FTE — '+label;
+    charts.lsFteTrend.data.datasets[1].label='FACT FTE — '+label;
+    charts.lsFteTrend.update();
+  }
+  if(charts.lsFteCost){
+    charts.lsFteCost.data.datasets[0].data=f.factCost;
+    charts.lsFteCost.data.datasets[1].data=f.deployed;
+    charts.lsFteCost.data.datasets[0].label='FACT Cost ($) — '+label;
+    charts.lsFteCost.data.datasets[1].label='Deployed Cost ($) — '+label;
+    charts.lsFteCost.update();
+  }
+  // Note
+  const note=document.getElementById('ls-fin-note');
+  if(note){
+    const cap = sel==='all' ? 'Across all 4 billed domains (Hybrid Cloud, Database, Backup, Capacity), deployed' : 'For <b>'+label+'</b>, deployed';
+    note.innerHTML = cap+' cost moved from <b>'+lsFmtK(f.deployed[0])+' (Jan)</b> to <b>'+lsFmtK(f.deployed[4])+' (May)</b> as actual FTE went from '+f.actFte[0].toFixed(2)+' to '+f.actFte[4].toFixed(2)+' &mdash; against a '+f.factFte[0].toFixed(2)+' FACT model baseline.';
+  }
+}
+
+/* Leadership Summary — Incident cube: per assignment group (and All), the
+   Incident Snapshot KPIs, 6-month MTTR trend, and open-incident aging buckets.
+   Drives the single Assignment-group filter so the whole snapshot re-computes.
+   Derived from PKB_incident.xlsx (aging buckets: 0–2 / 2–5 / 5–10 / >10 days). */
+const LSINC = {"months":["Jan-26","Feb-26","Mar-26","Apr-26","May-26","Jun-26"],"groups":{"All":{"total":788,"may":160,"mttrMay":0.43,"closed":755,"open":33,"p2":36,"trend":[1.89,0.85,0.84,0.96,0.43,0.52],"aging":[0,0,15,18]},"Unisys HybridCloud - UIS - PKB":{"total":773,"may":156,"mttrMay":0.38,"closed":741,"open":32,"p2":36,"trend":[1.84,0.79,0.83,0.96,0.38,0.5],"aging":[0,0,15,17]},"Backup-APAC-IND":{"total":15,"may":4,"mttrMay":2.32,"closed":14,"open":1,"p2":0,"trend":[3.05,2.74,2.22,0.87,2.32,1.96],"aging":[0,0,0,1]}}};
+
+/* MTTR cube: [sumDays,count] per month × group × auto-resolved (auto = Close code
+   "Solved Remotely (Permanently)"). Lets the MTTR trend honour BOTH the section
+   group filter and the chart's Auto-resolved filter. Derived from PKB_incident.xlsx. */
+const LSMTTR = {"groups":["Unisys HybridCloud - UIS - PKB","Backup-APAC-IND","Other"],"buckets":[[[[169.2773,39],[40.33,75]],[[15.2372,5],[0.0,0]],[[0.0,0],[0.0,0]]],[[[56.0475,27],[14.7009,63]],[[8.2224,3],[0.0,0]],[[0.0,0],[0.0,0]]],[[[76.4617,17],[54.776,141]],[[2.2202,1],[0.0,0]],[[0.0,0],[0.0,0]]],[[[91.8654,22],[84.0595,161]],[[0.8725,1],[0.0,0]],[[0.0,0],[0.0,0]]],[[[18.4357,8],[40.479,147]],[[9.2856,4],[0.0,0]],[[0.0,0],[0.0,0]]],[[[11.0631,6],[23.086,62]],[[1.9564,1],[0.0,0]],[[0.0,0],[0.0,0]]]]};
+function lsComputeMttrTrend(groupName, autoMode){
+ return LSMTTR.buckets.map(monthGroups=>{
   let sum=0,cnt=0;
   for(let gi=0; gi<LSMTTR.groups.length; gi++){
-   if(groupSel!==-1 && gi!==groupSel) continue;
+   if(groupName!=='All' && LSMTTR.groups[gi]!==groupName) continue;
    for(let ai=0; ai<2; ai++){
     if(autoMode==='auto' && ai!==1) continue;
     if(autoMode==='noauto' && ai!==0) continue;
-    const b=LSMTTR.buckets[mi][gi][ai];
-    sum+=b[0]; cnt+=b[1];
+    sum+=monthGroups[gi][ai][0]; cnt+=monthGroups[gi][ai][1];
    }
   }
   return cnt ? +(sum/cnt).toFixed(2) : null;
  });
 }
-function lsRenderMttr(){
- if(!charts.lsMttr) return;
- const autoMode=(document.getElementById('ls-mttr-auto')||{}).value||'all';
- const gv=(document.getElementById('ls-mttr-group')||{}).value;
- const groupSel=(gv===undefined||gv==='')?-1:parseInt(gv,10);
- charts.lsMttr.data.datasets[0].data=lsComputeMttr(groupSel,autoMode);
- const gl = groupSel===-1 ? 'All groups' : LSMTTR.groups[groupSel];
- const al = autoMode==='auto' ? 'auto-resolved only' : autoMode==='noauto' ? 'excl. auto-resolved' : 'all incidents';
- charts.lsMttr.data.datasets[0].label='MTTR (days) — '+gl+' · '+al;
- charts.lsMttr.update();
+function lsRenderIncident(){
+ const sel=(document.getElementById('ls-inc-group')||{}).value||'All';
+ const d=LSINC.groups[sel]||LSINC.groups['All'];
+ const set=(id,val)=>{const el=document.getElementById(id); if(el) el.textContent=val;};
+ set('ls-inc-total', d.total);
+ set('ls-inc-may', d.may);
+ set('ls-inc-mttr', d.mttrMay.toFixed(2)+'d');
+ set('ls-inc-closed', d.closed);
+ set('ls-inc-open', d.open);
+ set('ls-inc-p2', d.p2);
+ if(charts.lsMttr){
+  const auto=(document.getElementById('ls-mttr-auto')||{}).value||'all';
+  charts.lsMttr.data.datasets[0].data=lsComputeMttrTrend(sel,auto);
+  const al = auto==='auto' ? 'auto-resolved only' : auto==='noauto' ? 'excl. auto-resolved' : 'all incidents';
+  charts.lsMttr.data.datasets[0].label='MTTR (days) — '+sel+' · '+al;
+  charts.lsMttr.update();
+ }
+ if(charts.lsAging){
+  charts.lsAging.data.datasets[0].data=d.aging;
+  charts.lsAging.update();
+ }
 }
 
 function initCharts() {
@@ -3424,8 +3536,8 @@ function initCharts() {
   type:'line',
   data:{labels:['Jan-26','Feb-26','Mar-26','Apr-26','May-26'],
    datasets:[
-    {label:'Actual FTE',data:[1.74,1.73,1.96,2.33,2.30],borderColor:'#007272',backgroundColor:'rgba(0,114,114,0.1)',fill:true,tension:0.3,pointRadius:5},
-    {label:'FACT FTE',data:[1.64,1.64,1.64,1.64,1.64],borderColor:'#e74c3c',borderDash:[5,5],fill:false,tension:0,pointRadius:3}
+    {label:'Actual FTE (all domains)',data:[2.12,2.20,2.27,2.79,2.76],borderColor:'#007272',backgroundColor:'rgba(0,114,114,0.1)',fill:true,tension:0.3,pointRadius:5},
+    {label:'FACT FTE (all domains)',data:[1.97,1.97,1.97,1.97,1.97],borderColor:'#e74c3c',borderDash:[5,5],fill:false,tension:0,pointRadius:3}
    ]},
   options:{responsive:true,plugins:{legend:{position:'bottom'}},scales:{y:{beginAtZero:false,title:{display:true,text:'FTE Count'}}}}
  });
@@ -3435,8 +3547,8 @@ function initCharts() {
   type:'bar',
   data:{labels:['Jan-26','Feb-26','Mar-26','Apr-26','May-26'],
    datasets:[
-    {label:'FACT Cost ($)',data:[3469.09,3469.09,3469.09,3469.09,3469.09],backgroundColor:'rgba(0,114,114,0.3)',borderColor:'#007272',borderWidth:1},
-    {label:'Deployed Cost ($)',data:[3316.93,4705.48,5658.00,8383.70,8299.33],backgroundColor:'rgba(39,174,96,0.5)',borderColor:'#27ae60',borderWidth:1}
+    {label:'FACT Cost ($, all domains)',data:[5258.89,5258.89,5258.89,5258.89,5258.89],backgroundColor:'rgba(0,114,114,0.3)',borderColor:'#007272',borderWidth:1},
+    {label:'Deployed Cost ($, all domains)',data:[4037.44,5646.50,6226.53,9316.70,9212.33],backgroundColor:'rgba(39,174,96,0.5)',borderColor:'#27ae60',borderWidth:1}
    ]},
   options:{responsive:true,plugins:{legend:{position:'bottom'}},scales:{y:{beginAtZero:true,title:{display:true,text:'USD ($)'}}}}
  });
@@ -3471,8 +3583,8 @@ function initCharts() {
    type:'line',
    data:{labels:['Jan-26','Feb-26','Mar-26','Apr-26','May-26'],
     datasets:[
-     {label:'Actual FTE',data:[1.74,1.73,1.96,2.33,2.30],borderColor:'#007272',backgroundColor:'rgba(0,114,114,0.1)',fill:true,tension:0.3,pointRadius:5},
-     {label:'FACT FTE',data:[1.64,1.64,1.64,1.64,1.64],borderColor:'#e74c3c',borderDash:[5,5],fill:false,tension:0,pointRadius:3}
+     {label:'Actual FTE (all domains)',data:[2.12,2.20,2.27,2.79,2.76],borderColor:'#007272',backgroundColor:'rgba(0,114,114,0.1)',fill:true,tension:0.3,pointRadius:5},
+     {label:'FACT FTE (all domains)',data:[1.97,1.97,1.97,1.97,1.97],borderColor:'#e74c3c',borderDash:[5,5],fill:false,tension:0,pointRadius:3}
     ]},
    options:{responsive:true,plugins:{legend:{position:'bottom'}},scales:{y:{beginAtZero:false,title:{display:true,text:'FTE Count'}}}}
   });
@@ -3483,31 +3595,27 @@ function initCharts() {
    type:'bar',
    data:{labels:['Jan-26','Feb-26','Mar-26','Apr-26','May-26'],
     datasets:[
-     {label:'FACT Cost ($)',data:[3469.09,3469.09,3469.09,3469.09,3469.09],backgroundColor:'rgba(0,114,114,0.3)',borderColor:'#007272',borderWidth:1},
-     {label:'Deployed Cost ($)',data:[3316.93,4705.48,5658.00,8383.70,8299.33],backgroundColor:'rgba(39,174,96,0.5)',borderColor:'#27ae60',borderWidth:1}
+     {label:'FACT Cost ($, all domains)',data:[5258.89,5258.89,5258.89,5258.89,5258.89],backgroundColor:'rgba(0,114,114,0.3)',borderColor:'#007272',borderWidth:1},
+     {label:'Deployed Cost ($, all domains)',data:[4037.44,5646.50,6226.53,9316.70,9212.33],backgroundColor:'rgba(39,174,96,0.5)',borderColor:'#27ae60',borderWidth:1}
     ]},
    options:{responsive:true,plugins:{legend:{position:'bottom'}},scales:{y:{beginAtZero:true,title:{display:true,text:'USD ($)'}}}}
   });
  }
- // ===== Leadership Summary — Incident MTTR Trend (days), filterable by auto-resolved & group =====
+ // ===== Leadership Summary — Incident MTTR Trend (days); driven by the Incident Snapshot group filter =====
  if(document.getElementById('ls-mttr-trend')){
-  const gsel=document.getElementById('ls-mttr-group');
-  if(gsel && gsel.options.length<=1){
-   LSMTTR.groups.forEach((g,i)=>{ if(g==='Other') return; const o=document.createElement('option'); o.value=i; o.textContent=g; gsel.appendChild(o); });
-  }
   charts.lsMttr=new Chart(document.getElementById('ls-mttr-trend'),{
    type:'line',
-   data:{labels:LSMTTR.months,
-    datasets:[{label:'MTTR (days) — All groups · all incidents',data:lsComputeMttr(-1,'all'),borderColor:'#007272',backgroundColor:'rgba(0,114,114,0.12)',fill:true,tension:0.35,pointRadius:4,borderWidth:2,spanGaps:true}]},
+   data:{labels:LSINC.months,
+    datasets:[{label:'MTTR (days) — All groups',data:LSINC.groups['All'].trend,borderColor:'#007272',backgroundColor:'rgba(0,114,114,0.12)',fill:true,tension:0.35,pointRadius:4,borderWidth:2,spanGaps:true}]},
    options:{responsive:true,plugins:{legend:{position:'bottom'}},scales:{y:{beginAtZero:true,title:{display:true,text:'Days to resolve'}}}}
   });
  }
- // ===== Leadership Summary — Aging open incidents by age =====
+ // ===== Leadership Summary — Aging open incidents by age; driven by the Incident Snapshot group filter =====
  if(document.getElementById('ls-aging-bar')){
   charts.lsAging=new Chart(document.getElementById('ls-aging-bar'),{
    type:'bar',
    data:{labels:['0–2 days','2–5 days','5–10 days','>10 days'],
-    datasets:[{label:'Open incidents',data:[0,0,19,14],backgroundColor:['#27ae60','#f1c40f','#e67e22','#e74c3c'],borderRadius:6}]},
+    datasets:[{label:'Open incidents',data:LSINC.groups['All'].aging,backgroundColor:['#27ae60','#f1c40f','#e67e22','#e74c3c'],borderRadius:6}]},
    options:{responsive:true,indexAxis:'y',plugins:{legend:{display:false}},scales:{x:{beginAtZero:true,title:{display:true,text:'Open incidents by age'}}}}
   });
  }
@@ -3639,8 +3747,8 @@ function exportExecutivePDF() {
  fteTrendImg.style.display = 'none';
 
  var _trendLbl = (charts.fteTrend && charts.fteTrend.data && charts.fteTrend.data.labels && charts.fteTrend.data.labels.length) ? charts.fteTrend.data.labels : ['Jan-26','Feb-26','Mar-26','Apr-26'];
- var _trendActual = (charts.fteTrend && charts.fteTrend.data && charts.fteTrend.data.datasets[0].data.length) ? charts.fteTrend.data.datasets[0].data : [1.74, 1.73, 1.96, 2.33, 2.30];
- var _trendFact = (charts.fteTrend && charts.fteTrend.data && charts.fteTrend.data.datasets[1] && charts.fteTrend.data.datasets[1].data.length) ? charts.fteTrend.data.datasets[1].data : [1.64, 1.64, 1.64, 1.64, 1.64];
+ var _trendActual = (charts.fteTrend && charts.fteTrend.data && charts.fteTrend.data.datasets[0].data.length) ? charts.fteTrend.data.datasets[0].data : [2.12, 2.20, 2.27, 2.79, 2.76];
+ var _trendFact = (charts.fteTrend && charts.fteTrend.data && charts.fteTrend.data.datasets[1] && charts.fteTrend.data.datasets[1].data.length) ? charts.fteTrend.data.datasets[1].data : [1.97, 1.97, 1.97, 1.97, 1.97];
  var fteTrendChart = new Chart(fteTrendCanvas, {
   type: 'line',
   data: {
@@ -3668,8 +3776,8 @@ function exportExecutivePDF() {
  fteCostImg.style.display = 'none';
 
  var _costLbl = (charts.fteCost && charts.fteCost.data && charts.fteCost.data.labels && charts.fteCost.data.labels.length) ? charts.fteCost.data.labels : ['Jan-26','Feb-26','Mar-26','Apr-26'];
- var _costFact = (charts.fteCost && charts.fteCost.data && charts.fteCost.data.datasets[0].data.length) ? charts.fteCost.data.datasets[0].data : [3469.09, 3469.09, 3469.09, 3469.09, 3469.09];
- var _costDep = (charts.fteCost && charts.fteCost.data && charts.fteCost.data.datasets[1] && charts.fteCost.data.datasets[1].data.length) ? charts.fteCost.data.datasets[1].data : [3316.93, 4705.48, 5658.00, 8383.70, 8299.33];
+ var _costFact = (charts.fteCost && charts.fteCost.data && charts.fteCost.data.datasets[0].data.length) ? charts.fteCost.data.datasets[0].data : [5258.89, 5258.89, 5258.89, 5258.89, 5258.89];
+ var _costDep = (charts.fteCost && charts.fteCost.data && charts.fteCost.data.datasets[1] && charts.fteCost.data.datasets[1].data.length) ? charts.fteCost.data.datasets[1].data : [4037.44, 5646.50, 6226.53, 9316.70, 9212.33];
  var fteCostChart = new Chart(fteCostCanvas, {
   type: 'bar',
   data: {
