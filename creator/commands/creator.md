@@ -13,14 +13,19 @@ component library, and behavioral constraints defined in `.claude/agents/Creator
 
 This is the **main conversation thread**, so run onboarding interactively.
 
-## Onboarding (only ask for what's missing)
-1. **Data file** — if the user hasn't supplied one, ask: "Please share the data file you'd like turned
-   into a dashboard — CSV, XLSX, JSON, tabular text, or a PowerPoint (.pptx) deck (a path is fine). I'll
-   profile it and decide which sections to activate." Parse it with the Bash tool + Python for
-   CSV/XLSX/large dumps; for `.pptx`, extract slide text and tables with `python-pptx` (the SDR deck is
-   the template's native data source).
-2. **Account & period** — only if not derivable from the data, ask for the account/client name and the
-   reporting period so `<title>`, `acct-name`, `ops-name`, and `period-name` are correct.
+## Onboarding (ask these three questions up front, unless already supplied)
+Ask all three together in your first turn (use the AskUserQuestion tool, or a simple numbered list),
+then proceed. Skip any item the user already provided in their command input.
+
+1. **Which client is this for?** → sets `<title>`, `acct-name`, and `ops-name`.
+2. **Which month (reporting period)?** → sets `<span class="period-name">` (e.g. "May 2026" or "Q1 FY26").
+3. **What is the path of the file(s) to analyze and build the SDR from?** → the data source.
+   Accept CSV, XLSX, JSON, tabular/plain text, or a PowerPoint (.pptx) deck; a path (or several) is fine.
+   Parse it with the Bash tool + Python for CSV/XLSX/large dumps; for `.pptx`, extract slide text and
+   tables with `python-pptx` (the SDR deck is the template's native data source).
+
+If the client or period turns out to be clearly derivable from the data itself, use the data's value and
+note the assumption — but still ask all three up front so nothing is missed.
 
 **Never ask which sections to populate** — analyze the data and make that executive decision yourself.
 

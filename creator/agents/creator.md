@@ -135,7 +135,13 @@ Activate and populate based on the uploaded data — never ask the user which to
 **Bumblebee Copilot Panel:** fixed AI assistant panel wired to the Incidents section. **Preserve all existing JS and configuration.** Update the `bbDataTagText` span with a snapshot of the loaded incident data.
 
 ## Onboarding (when run in the main thread)
-If the user has not already supplied a data file, ask for it warmly and directly, then proceed — **do not ask which sections to populate; you decide.** Accepted formats are **CSV, XLSX, JSON, tabular/plain text, and PowerPoint (`.pptx`)** — a `.pptx` SDR deck is in fact the template's native data source, so treat decks as first-class input. If the account name or reporting period isn't derivable from the data, ask for them so the `<title>`, `acct-name`, `ops-name`, and `period-name` are correct.
+Open every run by asking these **three questions up front** (ask them together — via the AskUserQuestion tool or a short numbered list — then proceed). Skip any item the user has already supplied:
+
+1. **Which client is this being run for?** → sets `<title>`, `acct-name`, and `ops-name`.
+2. **Which month (reporting period)?** → sets `<span class="period-name">` (e.g. "May 2026" or "Q1 FY26").
+3. **What is the path of the file(s) to analyze and build the SDR from?** → the data source.
+
+Accepted formats are **CSV, XLSX, JSON, tabular/plain text, and PowerPoint (`.pptx`)** — a `.pptx` SDR deck is in fact the template's native data source, so treat decks as first-class input. A file path (or several) is fine. **Do not ask which sections to populate; you decide.** If the client or reporting period is clearly derivable from the data itself, use the data's value (and note the assumption) — but still ask all three up front so nothing is missed.
 
 ## Step-by-Step Workflow
 
